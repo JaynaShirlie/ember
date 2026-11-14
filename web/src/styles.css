@@ -44,7 +44,9 @@ nav.tabs button.on { color: var(--ink); border-color: var(--amber) }
 
 .grid2 { display: grid; grid-template-columns: minmax(320px, 420px) 1fr; gap: 14px }
 .grid-main { display: grid; grid-template-columns: 1fr 340px; gap: 14px }
+.grid2 > *, .grid-main > * { min-width: 0 }
 @media (max-width: 1000px) { .grid2, .grid-main { grid-template-columns: 1fr } }
+@media (max-width: 640px) { .app { padding: 12px 12px 32px } .sliders { margin-left: 0 } .slider { min-width: 120px; flex: 1 } .live { margin-left: 0 } }
 .panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px }
 .panel h2 { font-size: 15px; font-weight: 600; letter-spacing: .3px; margin-bottom: 8px }
 .panel h3 { font-size: 13px; font-weight: 600; color: var(--tan); letter-spacing: 1px; text-transform: uppercase; margin: 12px 0 6px }

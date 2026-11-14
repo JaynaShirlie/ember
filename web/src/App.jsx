@@ -33,7 +33,11 @@ export default function App() {
       .then(([meta, invs, tests, gp]) => setData({ meta, invs, tests, gp }))
       .catch(e => setErr(String(e)))
   }, [])
-  useEffect(() => { location.hash = tab }, [tab])
+  useEffect(() => { if (location.hash.slice(1) !== tab) location.hash = tab }, [tab])
+  useEffect(() => {
+    const on = () => { const h = location.hash.slice(1); if (TABS.some(([id]) => id === h)) setTab(h) }
+    window.addEventListener('hashchange', on); return () => window.removeEventListener('hashchange', on)
+  }, [])
 
   const testsByInv = useMemo(() => {
     const m = {}

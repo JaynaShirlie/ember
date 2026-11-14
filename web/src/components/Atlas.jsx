@@ -70,7 +70,7 @@ function Detail({ r, tests, hab }) {
       <div className="small" style={{ marginBottom: 8 }}>
         <a href={inv.url} target="_blank" rel="noreferrer">Open in NASA PSI ↗</a>
         {inv.doi && <> · DOI <a href={'https://doi.org/' + inv.doi} target="_blank" rel="noreferrer">{inv.doi}</a></>}
-        {inv.totalSize ? ` · dataset ${(inv.totalSize / 1e9 >= 1 ? (inv.totalSize / 1e9).toFixed(1) + ' GB' : (inv.totalSize / 1e6).toFixed(0) + ' MB')}` : ''}
+        {inv.totalSize ? ` · dataset ${inv.totalSize >= 2 ** 40 ? (inv.totalSize / 2 ** 40).toFixed(2) + ' TB' : inv.totalSize >= 2 ** 30 ? (inv.totalSize / 2 ** 30).toFixed(2) + ' GB' : (inv.totalSize / 2 ** 20).toFixed(0) + ' MB'} on PSI` : ''}
       </div>
 
       <h3>Why this rank · score {r.score.toFixed(1)}</h3>

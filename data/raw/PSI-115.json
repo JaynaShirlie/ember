@@ -1,0 +1,277 @@
+{
+ "accession": "PSI-115",
+ "title": "Utilization of the Smoke Aerosol Measurement Experiment Data for Advanced Modeling and Simulation of Smoke Generation in Micro-Gravity",
+ "investigationAcronym": "",
+ "doi": "10.60555/q0v5-1v28",
+ "researchArea": "Combustion Science",
+ "subResearchArea": "Smoke Aerosol, Combustion Simulation",
+ "projectType": "Ground Investigation",
+ "proposalTitle": "",
+ "objective": "The objective of this investigation was to use numerical simulation to explore the influence of gravity on pyrolysis smoke growth from a fundamental perspective. The intention of this effort is to quantify the differences between microgravity and Earth gravity smoke, and to identify the fluid dynamic mechanisms that cause the differences.",
+ "approach": "The formation and growth of dibutyl-phthalate (DBP) particles in Earth gravity and microgravity environments was simulated. Direct numerical simulation via a Navier-Stokes nodal approach was utlilized. The smoke originates from pyrolysis vapor expelled from a heated sample in a geometry similar to that considered in the SAME experiments. This study considered two cross-flow velocities of sufficiently low speed that buoyancy cannot be neglected in the presence of gravity. Simulations are presented to assess the dependence of particle size distributions on thermophoresis, particle settling, and flow geometry. The final report for this investigation introduces the simulation and modeling methodology, followed by a description of the flow geometry and the parameter space under consideration.The differences in the wake geometry attributable to buoyancy for the lower of two flow speeds was examined.  Instantaneous scalar fields were used to describe particle accumulation and growth in the buoyant and non-buoyant wakes that form downstream of the hot vapor source.",
+ "hypothesis": "Without buoyancy, mixing and heat transfer are reduced, the time-temperature history of the combustion vapors (or particle precursors) and particle trajectories are significantly altered, changing the composition of the smoke. The chemical composition of the burning material also affects the characteristics of the smoke generated.",
+ "researchImpacts": "Models and tools that characterize particles generated as smoke can be used to ascertain how temperature, gravity, and material properties affect the smoke produced. This would directly lead to better smoke detection devices and prevent fires that can lead to loss of materiel and loss of life.",
+ "description": "",
+ "experimentHardware": "",
+ "flightProgram": "Not Applicable",
+ "missionName": "",
+ "investigationStartDate": "01-30-2017",
+ "investigationEndDate": "12-31-2019",
+ "releaseDate": "18-Sep-2024",
+ "modifiedDate": "02-Jun-2025",
+ "licenseName": "Creative Commons Zero v1.0 Universal",
+ "managingNasaCenter": "Glenn Research Center (GRC)",
+ "totalFileSize": 264404901.0,
+ "version": 3,
+ "factors": [],
+ "payloads": [],
+ "related": [
+  "PSI-102"
+ ],
+ "publications": [],
+ "files": [
+  {
+   "name": "PSI-115_metadata_PSI-185_Utilization of the S.zip",
+   "size": 7021,
+   "category": "metadata"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravityNumDen.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravityNucRate.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravitySmoke.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravityDAM.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravityU.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravityPSD.dat",
+   "size": 1716.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravityVort.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravitySpeciesMF.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravityTemperature.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravityV.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravityNS_PSD.dat",
+   "size": 1755.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravityuR.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravityvR.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmGravityNumdenR.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityPSD.dat",
+   "size": 1716.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityNumDen.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravitySmoke.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityDAM.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityNucRate.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityV.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityVaporMF.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityVort.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityTemperature.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityU.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityNoTF_PSD.dat",
+   "size": 1755.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityNoTF_u.dat",
+   "size": 6220839.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityNoTF_v.dat",
+   "size": 6220839.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityNoTF_NumDen.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityuR.dat",
+   "size": 6220865.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityvR.dat",
+   "size": 6220865.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cmNoGravityNumDenR.dat",
+   "size": 6220865.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_10cmGravitySmoke.dat",
+   "size": 6220838.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_10cmGravityU.dat",
+   "size": 6220849.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_10cmGravityV.dat",
+   "size": 6220849.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_10cmGravityPSD.dat",
+   "size": 1716.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_10cmGravityNumDen.dat",
+   "size": 6220849.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_10cmNoGravitySmoke.dat",
+   "size": 6220866.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_10cmNoGravityU.dat",
+   "size": 6220866.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_10cmNoGravityV.dat",
+   "size": 6220866.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_10cmNoGravityPSD.dat",
+   "size": 1716.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_10cmNoGravityNumDen.dat",
+   "size": 6220866.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_10cm_sGrid_grid3d.dat",
+   "size": 17971238.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_nodeDiameters.dat",
+   "size": 1059.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Analyzed Data_8cm_sGrid_grid3d.dat",
+   "size": 17971238.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-115_Reports_NNX17AF08A_FinalReport.pdf",
+   "size": 10617514.0,
+   "category": "Reports"
+  },
+  {
+   "name": "PSI-115_Science Documents_DataOrganizationDocument.pdf",
+   "size": 96899.0,
+   "category": "Science Documents"
+  }
+ ],
+ "experimentalTables": [],
+ "searchInfo": {
+  "accession": "PSI-115",
+  "title": "Utilization of the Smoke Aerosol Measurement Experiment Data for Advanced Modeling and Simulation of Smoke Generation in Micro-Gravity",
+  "projectType": "Ground Investigation",
+  "subResearchArea": "Smoke Aerosol, Combustion Simulation"
+ },
+ "tablesDownloaded": []
+}

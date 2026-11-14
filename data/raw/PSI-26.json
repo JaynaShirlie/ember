@@ -1,0 +1,1146 @@
+{
+ "accession": "PSI-26",
+ "title": "Burning and Suppression of Solids",
+ "investigationAcronym": "BASS",
+ "doi": "10.60555/58h4-dy80",
+ "researchArea": "Combustion Science",
+ "subResearchArea": "Spacecraft Fire Safety",
+ "projectType": "Microgravity Investigation",
+ "proposalTitle": "",
+ "objective": "The two main objectives for BASS are to:\n    1.) Begin to bridge the gap between the normal gravity NASA-STD-6001 Test#1 method, ground-based microgravity tests, and actual material flammability in microgravity. The relation between these can be investigated by observing flames burning for the longer times available in flight. Practical, realistic (thicker) fuels in typical geometries will be examined, including wake flames which have characteristics of a fire burning behind another object (for example, a fire burning in tight area which may not be easily accessible).\n    2.) Assess the effectiveness of an inert, gaseous extinguishing agent (similar to that used on ISS) in putting out flames over different materials, geometries, preheating, and flow.",
+ "approach": "The experiment was conducted aboard the International Space Station (ISS) inside the Microgravity Glove Box (MSG). Custom-made fabric samples consisting of 75% cotton and 25% fiberglass (by mass) measuring were used as a fuel source as well as Nomex fabric and Ultem. A Kanthal wire (29-gage)igniter was used to initiate combustion at one end of the fabric. Airflow was controlled using a variable speed fan, with airflow speeds reaching as high as 40 cm/s. The airflow was directed along the fuel surface in either the opposed or concurrent direction.\n\nThis investigation explored two primary air flow configurations; concurrent-flow and opposed-flow. With concurrent-flow air flows in the same direction as the flame spread and in opposed-flow air flows in the opposite direction of flame spread. Flames were observed in the top and edge profiles and data was collected on flame size, shape, color, spread rate, and potential flame quenching. The samples were placed in a small flow duct (76 mm x 76 mm cross section) that allowed for airflow across the fabric. Other sample shapes were utilized as well including spheres and cylinders.",
+ "hypothesis": "BASS experiments were based on the hypothesis that materials in microgravity, with adequate ventilation, burn as well if not better than the same material in normal gravity with other conditions being identical (pressure, oxygen concentration, temperature, etc.) To test this hypothesis with any but the thinnest materials requires extended microgravity time – longer than available in drop towers or parabolic aircraft.",
+ "researchImpacts": "Current NASA spacecraft materials selection is based on a standard test method (NASA–STD–6001 Test 1) that segregates material based on 1-g behavior without consideration of low gravity effects. A critical element of this understanding is the radiative heat emission from the flame. These results are used in first order models and predictions of heat release in spacecraft fires and as a means to extend heat release data from tests like the NASA cone calorimeter test (NASA–STD–6001 Test 2) to a performance-based material selection process. Using nitrogen as a flame suppressant in microgravity provides a direct link to current and planned extinguishment techniques.\nBASS results provide essential guidance to ground-based microgravity combustion research efforts. Detailed combustion models are validated using the simpler flow environment afforded by tests in microgravity. Once validated, they can be used to build more complex combustion models needed to capture the important details of flames burning in normal gravity. These models have wide applicability to the general understanding of many terrestrial combustion problems and will guide novel spacecraft design and ensure the safety of future crewed missions.",
+ "description": "",
+ "experimentHardware": "Microgravity Science Glovebox",
+ "flightProgram": "International Space Station (ISS)",
+ "missionName": "",
+ "investigationStartDate": "10-01-2009",
+ "investigationEndDate": "06-30-2013",
+ "releaseDate": "30-Jun-2013",
+ "modifiedDate": "19-Mar-2025",
+ "licenseName": "Creative Commons Zero v1.0 Universal",
+ "managingNasaCenter": "Glenn Research Center (GRC)",
+ "totalFileSize": 163551372412.0,
+ "version": 4,
+ "factors": [],
+ "payloads": [],
+ "related": [
+  "PSI-107",
+  "PSI-25"
+ ],
+ "publications": [
+  {
+   "title": "The Microgravity Science Glovebox as a Platform for Exploration Research on the International Space Station",
+   "doi": "10.2514/6.2006-941"
+  },
+  {
+   "title": "Opposed-flow flame spread: A comparison of microgravity and normal gravity experiments to establish the thermal regime",
+   "doi": "10.1016/j.firesaf.2015.11.011"
+  },
+  {
+   "title": "Simplified model for predicting difference between flammability limits of a thin material in normal gravity and microgravity environments",
+   "doi": "10.1016/j.proci.2014.07.017"
+  },
+  {
+   "title": "A Correlation for an Effective Flow Velocity for Capturing the Boundary Layer Effect in Opposed-Flow Flame Spread over Thin Fuels",
+   "doi": "10.1080/00102202.2014.900056"
+  },
+  {
+   "title": "Radiation signature in opposed-flow flame spread",
+   "doi": "10.1504/PCFD.2012.048249"
+  },
+  {
+   "title": "OS24-1 The Effect of Boundary Layer on Blow-Off Extinction in Opposed-Flow Flame Spread: Results of Experiments and Simplified Analysis(invited,Scale modeling on solid combustion,OS24 Scale modeling,FLUID AND THERMODYNAMICS)",
+   "doi": "10.1299/jsmeatem.2015.14.289"
+  },
+  {
+   "title": "Role of Gas Radiation in the Mechanism of Opposed-Flow Flame Spread in a Microgravity Environment"
+  },
+  {
+   "title": "Thickness and Fuel Preheating Effects on Material Flammability in Microgravity from the BASS Experiment"
+  },
+  {
+   "title": "A novel apparatus for flame spread study",
+   "doi": "10.1016/j.proci.2012.05.076"
+  },
+  {
+   "title": "Opposed-Flow Flame Spread in a Narrow Channel Apparatus over Thin PMMA Sheets"
+  }
+ ],
+ "files": [
+  {
+   "name": "PSI-26_metadata_PSI-102_BASS.zip",
+   "size": 11647,
+   "category": "metadata"
+  },
+  {
+   "name": "PSI-26_Presentations_FlammabilityAspectsofCottonFiberglassFabric_ASGSR2012.pdf",
+   "size": 3212109.0,
+   "category": "Presentations"
+  },
+  {
+   "name": "PSI-26_Presentations_BASS_Overview of Recent ISS Results.pdf",
+   "size": 4640227.0,
+   "category": "Presentations"
+  },
+  {
+   "name": "PSI-26_Science Documents_FlammabilityAspectsofFabric_USNationalCombustion.2013.docx",
+   "size": 8837026.0,
+   "category": "Science Documents"
+  },
+  {
+   "name": "PSI-26_Presentations_Flammability Aspects of Fabric_USNationalCombustion2013.pdf",
+   "size": 2804257.0,
+   "category": "Presentations"
+  },
+  {
+   "name": "PSI-26_Reports_SPICE_FinalReport.pdf",
+   "size": 553693.0,
+   "category": "Reports"
+  },
+  {
+   "name": "PSI-26_Reports_BASS_FinalReport.pdf",
+   "size": 553693.0,
+   "category": "Reports"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_SLICE_SysReqDesignReview.pdf",
+   "size": 1429180.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Presentations_Crew Training 2010.pdf",
+   "size": 1348519.0,
+   "category": "Presentations"
+  },
+  {
+   "name": "PSI-26_Presentations_Crew Training 2011.pdf",
+   "size": 1339967.0,
+   "category": "Presentations"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_BASS_SysAcceptanceReview.1.pdf",
+   "size": 2892502.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_BASS_SysAcceptanceReview.2.pdf",
+   "size": 1804490.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130406 09.07.31 iss035m020950857.mp4",
+   "size": 283903792.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130406 10.24.05 iss035m020950943.mp4",
+   "size": 228771602.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130406 10.41.11 iss035m020951036.mp4",
+   "size": 280116626.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130406 11.28.00 iss035m.mp4",
+   "size": 209019676.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130406 12.34.43 iss035m020951219.mp4",
+   "size": 278027102.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130406 13.07.56 iss035m020951302.mp4",
+   "size": 208082076.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130406 14.06.03 iss035m020951400.mp4",
+   "size": 312481700.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130406 14.59.51 iss035m020951454.mp4",
+   "size": 141500631.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130406 15.45.35 iss035m020951540.mp4",
+   "size": 115752334.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_06_orig.zip",
+   "size": 2712698675.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_06_xmp.zip",
+   "size": 401539.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130405 18.17.49 iss035m020941810.mp4",
+   "size": 198360008.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_04_orig.zip",
+   "size": 124217721.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_09_orig.zip",
+   "size": 69413002.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_09_txt.zip",
+   "size": 34009.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130410 12.19.33 iss035m010991214.mp4",
+   "size": 246590084.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130410 13.13.10 iss035m010991307.mp4",
+   "size": 18775683.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130410 08.28.56 iss035m010990823.mp4",
+   "size": 111419172.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130410 08.56.46 iss035m010990851.mp4",
+   "size": 185670095.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130410 09.18.37 iss035m210991415.mp4",
+   "size": 226339657.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130410 09.44.27 iss035m010990939.mp4",
+   "size": 245385815.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130410 10.37.59 iss035m010991032.mp4",
+   "size": 387138355.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_10_orig.zip",
+   "size": 6959908041.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_10_txt.zip",
+   "size": 207098.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_10_xmp.zip",
+   "size": 1103214.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130413 12.16.41 iss035m021021209.mp4",
+   "size": 207136681.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130413 13.08.21 iss035m021021301.mp4",
+   "size": 148666716.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130413 13.46.04 iss035m021021340.mp4",
+   "size": 158582492.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130413 14.44.35 iss035m021021439.mp4",
+   "size": 57476072.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130413 14.54.06 iss035m211021753.mp4",
+   "size": 80533407.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130413 14.58.59 iss035m211021841.mp4",
+   "size": 69246996.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130413 15.22.17 iss035m021021451.mp4",
+   "size": 140679284.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130413 15.25.03 iss035m021021519.mp4",
+   "size": 175809888.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130413 16.38.10 iss035m021021615.mp4",
+   "size": 168522931.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130413 17.07.13 iss035m021021701.mp4",
+   "size": 171177300.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130413 17.59.52 iss035m021021754.mp4",
+   "size": 216390580.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_13_orig.zip",
+   "size": 6394821601.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_13_txt.zip",
+   "size": 396253.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_13_xmp.zip",
+   "size": 954521.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_16_orig.zip",
+   "size": 56580735.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_16_txt.zip",
+   "size": 2784.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_16_xmp.zip",
+   "size": 6384.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130424 18.11.56 iss035m041131806.mp4",
+   "size": 16680286.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130424 18.32.11 iss035m041131826.mp4",
+   "size": 117094059.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130424 19.00.20.iss035m041131855.mp4",
+   "size": 45146896.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130424 19.07.56 iss035m041131902.mp4",
+   "size": 235481561.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130424 12.50.34 iss035m041131244.mp4",
+   "size": 223107910.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130424 13.42.19 iss035m041131335.mp4",
+   "size": 232357658.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130424 14.12.03 iss035m041131406.mp4",
+   "size": 305498687.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130424 14.51.40 iss035m041131446.mp4",
+   "size": 34154771.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130424 15.10.18 iss035m041131505.mp4",
+   "size": 228512089.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130424 15.26.17 iss035m211131403.mp4",
+   "size": 220985819.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130424 15.48.58 iss035m041131543.mp4",
+   "size": 323097841.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130424 17.23.57 iss035m041131718.mp4",
+   "size": 289426700.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_24_orig.zip",
+   "size": 8245752246.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_24_txt.zip",
+   "size": 497564.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_24_xmp.zip",
+   "size": 1177965.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130417 14.34.15 iss035m021061428.mp4",
+   "size": 191582975.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130417 15.14.15 iss035m021061509.mp4",
+   "size": 324600358.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130417 10.04.54 iss035m021060956.mp4",
+   "size": 178818011.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130417 10.25.14 iss035m021061020.mp4",
+   "size": 27449239.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130417 11.19.32 iss035m021061114.mp4",
+   "size": 163840928.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130417 12.01.04 iss035m021061155.mp4",
+   "size": 193871923.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130417 12.28.05 iss035m211061958.mp4",
+   "size": 219615784.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130417 12.33.11 iss035m211061905.mp4",
+   "size": 128064146.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130417 12.58.19 iss035m021061253.mp4",
+   "size": 221328752.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130417 13.45.08 iss035m021061339.mp4",
+   "size": 145417578.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_17_orig.zip",
+   "size": 4680468623.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_17_txt.zip",
+   "size": 208623.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_17_xmp.zip",
+   "size": 390443.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130427 14.50.58 iss035m041161445.mp4",
+   "size": 349805189.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130427 09.35.33 iss035m041160926.mp4",
+   "size": 232873906.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130427 10.03.10 iss035m041160957.mp4",
+   "size": 317617060.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130427 10.59.00 iss035m041161053.mp4",
+   "size": 318831074.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130427 11.41.09 iss035m041161135.mp4",
+   "size": 293988147.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130427 11.45 32 iss035m211161447.mp4",
+   "size": 229283023.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130427 12.36.50 iss035m041161231.mp4",
+   "size": 204610302.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130427 13.04.25 iss035m041161259.mp4",
+   "size": 44291618.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130427 13.12.10 iss035m041161306.mp4",
+   "size": 338156701.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130427 14.15.22 iss035m041161410.mp4",
+   "size": 88329322.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130427 14.33.12 iss035m041161427.mp4",
+   "size": 81641309.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130427 14.44.48 iss035m041161439.mp4",
+   "size": 33703884.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_27_orig.zip",
+   "size": 6091837768.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_27_txt.zip",
+   "size": 391685.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_27_xmp.zip",
+   "size": 965924.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130430 17.27.04 iss035m061191721.mp4",
+   "size": 216891280.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130430 12.25.36 iss035m061191220.mp4",
+   "size": 213700558.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130430 13.02.54 iss035m061191257.mp4",
+   "size": 2922031.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130430 13.20.41 iss035m061191315.mp4",
+   "size": 226102240.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130430 13.57.59 iss035m061191352.mp4",
+   "size": 306729166.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130430 14.23.37 iss035m211191506.mp4",
+   "size": 100485157.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130430 16.43.47 iss035m061191638.mp4",
+   "size": 250066489.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_30_orig.zip",
+   "size": 3166332669.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_30_txt.zip",
+   "size": 211488.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_04_30_xmp.zip",
+   "size": 512654.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130503 18.32.24 iss035m051221823.mp4",
+   "size": 121638992.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130503 11.39.18 iss035m051221133.mp4",
+   "size": 94778752.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130503 11.52.25 iss035m051221147.mp4",
+   "size": 118467438.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130503 12.08.31 iss035m051221203.mp4",
+   "size": 45127773.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130503 12.28.06 iss035m051221222.mp4",
+   "size": 389515765.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130503 13.33.45 iss035m051221328.mp4",
+   "size": 145405244.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130503 14.10.04 iss035m051221404.mp4",
+   "size": 282540753.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130503 14.16.10 iss035m211231427.mp4",
+   "size": 173233198.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130503 14.55.00 iss035m051221449.mp4",
+   "size": 261390097.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130503 16.24.12 iss035m051221618.mp4",
+   "size": 394502728.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130503 17.28.23 iss035m051221723.mp4",
+   "size": 99632795.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130503 18.08.35 iss035m051221803.mp4",
+   "size": 40103842.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130503 18.16.34 iss035m051221811.mp4",
+   "size": 40253994.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_05_03_txt.zip",
+   "size": 293287.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_05_03_xmp.zip",
+   "size": 718748.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_05_03_orig.zip",
+   "size": 5071226041.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130516 14.45.11 iss036m021351439.mp4",
+   "size": 270274338.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130516 08.27.09 iss036m021350821.mp4",
+   "size": 159103964.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130516 08.49.07 iss036m021350843.mp4",
+   "size": 338923422.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130516 09.54.32 iss036m021350949.mp4",
+   "size": 368365655.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130516 10.43.19 iss036m021351038.mp4",
+   "size": 226915137.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130516 11.34.08 iss036m021351128.mp4",
+   "size": 269310139.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130516 11.43.19 iss036m211361831.mp4",
+   "size": 150902663.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130516 12.17.12 iss036m021351211.mp4",
+   "size": 270429296.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130516 13.10.24 iss036m021351305.mp4",
+   "size": 27586907.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130516 13.15.31 iss036m021351310.mp4",
+   "size": 262364529.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130516 13.52.21 iss036m021351347.mp4",
+   "size": 375562206.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_05_16_orig.zip",
+   "size": 2639609434.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_05_16_xmp.zip",
+   "size": 412392.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_05_18_orig.zip",
+   "size": 7733749134.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_05_18_xmp.zip",
+   "size": 1223139.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_07_09_orig.zip",
+   "size": 151894.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_07_09_txt.zip",
+   "size": 970.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130531 08.34.18 iss036m041500829.mp4",
+   "size": 154140481.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130531 09.03.03 iss036m041500857.mp4",
+   "size": 326903885.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130531 09.47.43 iss036m041500942.mp4",
+   "size": 277901853.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130531 10.38.29 iss036m041501033.mp4",
+   "size": 267275066.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130531 10.43.19 iss036m211501445.mp4",
+   "size": 188057292.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130531 11.20.18 iss036m041501115.mp4",
+   "size": 368718107.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130531 12.18.18 iss036m041501213.mp4",
+   "size": 72713576.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130531 12.41.52 iss036m041501236.mp4",
+   "size": 112925428.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130531 12.58.13 iss036m041501253.mp4",
+   "size": 364424651.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130531 14.32.48 iss036m041501427.mp4",
+   "size": 369583347.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130531 15.48.53 iss036m041501543.mp4",
+   "size": 278616521.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130531 16.27.05 iss036m041501621.mp4",
+   "size": 144368477.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_05_31_orig.zip",
+   "size": 1646572114.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2013_05_31_xmp.zip",
+   "size": 231631.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130518 10.08.55 iss036m061371003.mp4",
+   "size": 186236260.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130518 10.37.04 iss036m061371031.mp4",
+   "size": 57495703.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130518 11.32.45 iss036m061371127.mp4",
+   "size": 247003184.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130518 12.17.21 iss036m061371211.mp4",
+   "size": 218914661.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130518 12.24.23 iss036m211371933.mp4",
+   "size": 172824230.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130518 13.12.32 iss036m061371301.mp4",
+   "size": 233217557.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130518 13.52.35 iss036m061371347.mp4",
+   "size": 238941928.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130518 14.43.04 iss036m061371437.mp4",
+   "size": 205774649.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_20130518 15.27.19 iss036m061371521.mp4",
+   "size": 189392427.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_05_02_xmp.zip",
+   "size": 175180.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_05_03_orig.zip",
+   "size": 2476089935.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_05_03_xmp.zip",
+   "size": 350221.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_05_10_orig.zip",
+   "size": 792439018.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_05_11_orig.zip",
+   "size": 2844697506.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_05_12_orig.zip",
+   "size": 8997566948.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_06_05_orig.zip",
+   "size": 1262617898.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_06_06_orig.zip",
+   "size": 4214439670.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_06_11_orig.zip",
+   "size": 1634491491.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_06_12_orig.zip",
+   "size": 5890620977.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_06_15_orig.zip",
+   "size": 3061508921.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_06_19_orig.zip",
+   "size": 7983112981.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_06_28_orig.zip",
+   "size": 965204351.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_06_29_orig.zip",
+   "size": 4675941416.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_06_30_orig.zip",
+   "size": 3268891217.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_07_04_orig.zip",
+   "size": 5894963457.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_07_12.zip",
+   "size": 8583694205.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_07_23_orig.zip",
+   "size": 2605874658.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_07_20_orig.zip",
+   "size": 3509456036.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_08_09_orig.zip",
+   "size": 2865725168.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_08_17_orig.zip",
+   "size": 5677312134.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Raw Data_2012_08_22_orig.zip",
+   "size": 7913217716.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-26_Science Documents_Planned_Test Matrix.xlsx",
+   "size": 20976.0,
+   "category": "Science Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_BASS ERD.pptx",
+   "size": 2856973.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Presentations_BASS Overview.pptx",
+   "size": 1623251.0,
+   "category": "Presentations"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_SPICE Housing.pdf",
+   "size": 192768.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_SPICE_FanHousing.pdf",
+   "size": 133889.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_PMMA.Flat.Fuel.Sample2mm.pdf",
+   "size": 52408.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_Sibal.Flat.Sample.pdf",
+   "size": 121535.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_PMMA.SampleAssembly.pdf",
+   "size": 65227.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_Spherical.Sample_2cm.pdf",
+   "size": 78407.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_Blk.PMMA.Rod.pdf",
+   "size": 78284.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_PMMA.Flat.Fuel.Sample_2cm.pdf",
+   "size": 129048.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_PMMA.Flat.Samples_2cm.pdf",
+   "size": 58392.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_Sibal.Flat.Fuel.Sample_2cm.pdf",
+   "size": 55267.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_PMMA.Spherical.Section.pdf",
+   "size": 595300.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_PMMA.Blk.Rod.Sample.pdf",
+   "size": 65282.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_PMMA.Flat_1cm.pdf",
+   "size": 1108850.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_SPICE-front-window.pdf",
+   "size": 148197.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_60054MAFH000_C.pdf",
+   "size": 562119.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_SolidFuelFrame.pdf",
+   "size": 97640.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_Flat.Sample.Frame_2cm.pdf",
+   "size": 586059.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_Flat.Sample.Frame_1cm.pdf",
+   "size": 586727.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Drawing_Solid.Fuel.Sample_2cmSphere.pdf",
+   "size": 54006.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Engineering Documents_Short Nozzle MFA10771.pdf",
+   "size": 52766.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-26_Science Documents_SRD_BASS.pdf",
+   "size": 884257.0,
+   "category": "Science Documents"
+  },
+  {
+   "name": "PSI-26_Science Documents_DLD_BASS.pdf",
+   "size": 69653.0,
+   "category": "Science Documents"
+  },
+  {
+   "name": "PSI-26_Science Documents_As Run_Test Matrix.xlsx",
+   "size": 111886.0,
+   "category": "Science Documents"
+  }
+ ],
+ "experimentalTables": [
+  {
+   "file": "PSI-26_Experimental table_BASS.csv",
+   "version": 1
+  }
+ ],
+ "searchInfo": {
+  "accession": "PSI-26",
+  "title": "Burning and Suppression of Solids",
+  "projectType": "Microgravity Investigation",
+  "subResearchArea": "Spacecraft Fire Safety"
+ },
+ "tablesDownloaded": [
+  {
+   "file": "PSI-26_Experimental table_BASS.csv",
+   "bytes": 4726
+  }
+ ]
+}

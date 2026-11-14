@@ -1,0 +1,15 @@
+{
+ "harvestedAt": "2026-11-14T06:57:21Z",
+ "builtAt": "2026-11-14T07:18:26Z",
+ "investigations": 24,
+ "tables": 22,
+ "testRecords": 2014,
+ "flamesOrTests": 2943,
+ "withO2AndPressure": 1735,
+ "flexModelCV": {
+  "folds": 5,
+  "r2": 0.57,
+  "mae": 0.0574,
+  "coverage95": 0.946
+ }
+}

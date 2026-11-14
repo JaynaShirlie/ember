@@ -1,0 +1,1784 @@
+{
+ "accession": "PSI-101",
+ "title": "Smoke Aerosol Measurement Experiment-Reflight",
+ "investigationAcronym": "SAME-R",
+ "doi": "10.60555/2np7-jv14",
+ "researchArea": "Combustion Science",
+ "subResearchArea": "Spacecraft Fire Safety",
+ "projectType": "Microgravity Investigation",
+ "proposalTitle": "",
+ "objective": "Similar to the original SAME investigation, the primary objective of the SAME-R investigation was to quantify the sizes that the liquid smoke particulate achieves in low gravity and to relate the droplet size distribution to the smoke generation and smoke transport conditions in the experiment. One of the problems encountered during the SAME investigation was that after the thermal precipitators were returned to the ground, it was found that all the TEM grids were severely contaminated with some unidentified foreign particles, making these grids unusable although some of them showed shapes of certain types of smoke particles. Based on that experience the SAME-R investigation employed several modification covering new materials, extended operating conditions, and diagnostic equipments.",
+ "approach": "SAME-R utilized the SAME hardware used on-orbit. Based on the experience gained from SAME, SAME-R included the following modifications: 1) a new test material,\nPyrell®, an intumescent fire-retardant foam by Foamex, was introduced to replace DBP samples, 2) test conditions were broadened including higher heating temperatures and no-flow during sample heating time, and 3) a new instrument, M-pass, developed in-house GRC, was used to replace one of the two Commercial Diagnostic Enclosures that includes a DustTrak and an ionization detector used in SAME. SAME-R flight tests were conducted from July 16, to September 9, 2010, successfully completing 66 test points. After SAME-R flight tests, three major post–flight ground tests were performed to improve data reduction process and to validate the lognormal distribution assumption, the key to the moment method employed by SAME and SAME-R.",
+ "hypothesis": "The three hypotheses that motivated the original SAME investigation is also applicable for the reflight SAME-R investigation:\nIn a μg environment, with the absence of the strong buoyancy-induced flows, smoke particle growth from a pyrolyzing/smoldering source, as a result of nucleation, condensation, and coagulation, will lead to larger particles compared to those produced in 1g. The formation of the larger particles is favored by the expected higher vapor concentration and smoke residence times near the source due to the reduced velocities and mixing at μg conditions. In particular, it is hypothesized that liquid aerosol smokes produced in microgravity will exhibit substantially larger droplet sizes than under the same conditions in normal gravity (with a corresponding decrease in the particle number density for the same mass of smoke). The change in the size distribution and number density will, in turn, affect the response of the smoke detectors and possibly result in some detectors not producing an alarm when exposed to this smoke.",
+ "researchImpacts": "Along with the results from the original SAME investigation, the results from SAME-R can lead to technology for an advanced fire detector for future spacecraft that will be used for long duration missions. SAME will provide quantitative data on the sensitivity of these detectors to reduced gravity smokes that will allow evaluation of the adequacy of these existing technologies using relevant data. The current Fire Prevention, Detection, and Suppression (FPDS) program plan allows for the re-evaluation of future sensor technology, to allow new technology and capability to be utilized. The results from SAME are needed to provide the reduced gravity baseline data against which future detection technology developments can be evaluated. The smoke detectors developed from the results of SAME can also be useful in other extreme environments on Earth, such as submarines or underwater laboratories. Accurate detection of smoke in these environments can save lives.",
+ "description": "",
+ "experimentHardware": "Comparitive Soot Diagnostic Hardware; Refer to final report",
+ "flightProgram": "International Space Station (ISS)",
+ "missionName": "",
+ "investigationStartDate": "07-01-2010",
+ "investigationEndDate": "09-30-2010",
+ "releaseDate": "18-Sep-2024",
+ "modifiedDate": "02-Jun-2025",
+ "licenseName": "Creative Commons Zero v1.0 Universal",
+ "managingNasaCenter": "Glenn Research Center (GRC)",
+ "totalFileSize": 6308124750.0,
+ "version": 4,
+ "factors": [],
+ "payloads": [],
+ "related": [
+  "PSI-102"
+ ],
+ "publications": [
+  {
+   "title": "Smoke Aerosol Measurement Experiment-2: Comparison of Flight Experiment Results with Ground Test Results",
+   "doi": "10.2514/6.2013-3433"
+  },
+  {
+   "title": "Evaluation of Low-Gravity Smoke Particulate for Spacecraft Fire Detection"
+  },
+  {
+   "title": "Particle Morphology and Size Results from the Smoke Aerosol Measurement Experiment-2",
+   "doi": "10.2514/6.2012-3536"
+  },
+  {
+   "title": "Preliminary Results from the Smoke Aerosol Measurement Experiment - Reflight"
+  },
+  {
+   "title": "Detection of Smoke from Microgravity Fires"
+  },
+  {
+   "title": "Evaluation of spacecraft smoke detector performance in the low-gravity environment",
+   "doi": "10.1016/j.firesaf.2018.04.004"
+  }
+ ],
+ "files": [
+  {
+   "name": "PSI-101_Engineering Documents_SAME EIRD Rev 2.00 02-25-05 HIgh Q.pdf",
+   "size": 5378409.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Reports_SAME-R_Final Report.pdf",
+   "size": 4578437.0,
+   "category": "Reports"
+  },
+  {
+   "name": "PSI-101_Presentations_SAME-2_Comparison of Flight and Ground Test Results.pptx",
+   "size": 5634955.0,
+   "category": "Presentations"
+  },
+  {
+   "name": "PSI-101_Presentations_SAME-R_Particle Morphology and Size Results from the Smoke Aerosol Measurement Experiment-2.pptx",
+   "size": 11483943.0,
+   "category": "Presentations"
+  },
+  {
+   "name": "PSI-101_Presentations_SAME_Measurement of Smoke Particle Size under Low-Gravity Conditions.ppt",
+   "size": 7918592.0,
+   "category": "Presentations"
+  },
+  {
+   "name": "PSI-101_Presentations_Detection of Smoke from Microgravity Fires.ppt",
+   "size": 8259584.0,
+   "category": "Presentations"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_SAME VPRED Matrix PLN-005 Baseline.xls",
+   "size": 537600.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_Drawing_SAME Aging Chamber.PDF",
+   "size": 212840.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_54 lampwick binneddatacorr from GWM.xlsx",
+   "size": 241661.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_TEMflowvsnoflow.xls",
+   "size": 39936.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_thermal precipitator map updated.xlsx",
+   "size": 17138.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_Sample descriptions tables.docx",
+   "size": 28571083.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_55 Lampwick.xlsx",
+   "size": 690112.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_60 silicone.xlsx",
+   "size": 423378.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_62 Kapton unaged.xlsx",
+   "size": 425564.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_62 Kapton aged issue with bins.xlsx",
+   "size": 426012.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_63 Pyrell aged.xlsx",
+   "size": 711060.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_63 Pyrell unaged.xlsx",
+   "size": 853799.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_64 Pyrell aged.xlsx",
+   "size": 475108.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_64 Pyrell unaged.xlsx",
+   "size": 516572.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_94 Kapton aged- results.xlsx",
+   "size": 415552.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_197_13_silicon_run48.xls",
+   "size": 5797888.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_202_14_silcon_run53.xls",
+   "size": 5819904.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_200_12_lampwick_run49.xls",
+   "size": 4892160.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_201_12_teflon_run50.xls",
+   "size": 6471168.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_202_13_pyrell_run52.xls",
+   "size": 5827072.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_210_10_lampwick_run54.xls",
+   "size": 7128576.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_210_10_lampwick_run55.xls",
+   "size": 2990080.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_2010_210_10_lampwick_run55 wrong.xls",
+   "size": 4406784.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_210_10_lampwick_run57_a.xlsx",
+   "size": 539444.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_210_10_lampwick_run57.xls",
+   "size": 5050880.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_210_10_teflon_run56.xls",
+   "size": 4087296.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_211_12_teflon_run58.xls",
+   "size": 6683648.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_211_13_silcon_run59.xls",
+   "size": 6681600.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_2010_211_14_lampwick run 55 corrected.xls",
+   "size": 6368768.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_211_14_silicon_run60.xls",
+   "size": 5135360.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_211_14_silicon_run60 a.xls",
+   "size": 6913024.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_ISS Coagulation.doc",
+   "size": 141312.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_214_10_kapton_run61.xls",
+   "size": 6652416.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_214_10_kapton_run62.xls",
+   "size": 6525440.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_235_9_pyrell_run63.xls",
+   "size": 6210560.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_235_9_pyrell_run63a.xls",
+   "size": 6212608.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_235_11_pyrell_run64.xls",
+   "size": 6659072.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_235_11_pyrell_run64a.xls",
+   "size": 6657536.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_235_10_silicone_run65.xls",
+   "size": 7300096.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_235_10_silicone_run65a.xls",
+   "size": 7281664.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_235_10_silicone_run66.xls",
+   "size": 6486016.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_Copy of 2010_235_10_silicone_run66 test.xls",
+   "size": 6486016.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_239_13_lampwick_run78.xls",
+   "size": 6881280.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_239_14_teflon_run79.xls",
+   "size": 6196224.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_239_15_lampwick_run80.xls",
+   "size": 6142464.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_239_16_teflon_run81.xls",
+   "size": 6152704.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_239_16_lampwick_run82.xls",
+   "size": 6536192.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_239_17_teflon_run83.xls",
+   "size": 6318592.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_238_17_kapton_run73.xls",
+   "size": 6193152.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_238_17_pyrell_run74.xls",
+   "size": 6240256.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_238_18_kapton_run75.xls",
+   "size": 6082048.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_238_18_pyrell_run76.xls",
+   "size": 6396416.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_238_19_kapton_run77.xls",
+   "size": 6254080.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_236_9_silicone_run67.xls",
+   "size": 6136320.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_236_10_lampwick_run68.xls",
+   "size": 6075904.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_236_10_teflon_run69.xls",
+   "size": 6508032.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_237_12_kapton_run70.xls",
+   "size": 6429184.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_237_13_pyrell_run71.xls",
+   "size": 7195648.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_237_14_silcone_run72.xls",
+   "size": 5757440.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_242_12_kapton_run85.xls",
+   "size": 6240768.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_242_13_pyrell_run87.xls",
+   "size": 5726720.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_242_14_lampwick_run88.xls",
+   "size": 8515584.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_242_14_silicone_run86.xls",
+   "size": 6390784.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_242_15_kapton_run90.xls",
+   "size": 6123008.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_242_15_teflon_run89.xls",
+   "size": 5803008.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_2342_11_pyrell_run84.xls",
+   "size": 6522368.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_250_12_silicone_run91.xls",
+   "size": 5535744.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_250_13_kapton_run93.xls",
+   "size": 6305792.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_250_13_kapton_run94.xls",
+   "size": 6554112.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_250_14_pyrell_run95.xls",
+   "size": 6855680.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_250_15_lampwick_run96.xls",
+   "size": 6966784.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_250_16_kapton_run92.xls",
+   "size": 5737472.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_251_10_pyrell_run97.xls",
+   "size": 6767616.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_251_11_lampwick_run98.xls",
+   "size": 6456320.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_251_11_teflon_run100.xls",
+   "size": 6501888.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_251_12_silicone_run99.xls",
+   "size": 6533632.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_251_13_kapton_run101.xls",
+   "size": 6484480.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_251_14_kapton_run102.xls",
+   "size": 6569472.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_252_12_silicone_run104.xls",
+   "size": 8724992.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_252_13_pyrell_run107.xls",
+   "size": 8727552.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_252_14_lampwick_run106.xls",
+   "size": 8719872.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_252_14_teflon_run105.xls",
+   "size": 8713216.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_252_15_silicone_run103.xls",
+   "size": 8713216.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_252_16_kapton_run108.xls",
+   "size": 6617600.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_253_13_lampwick_run110.xls",
+   "size": 6128128.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_253_13_silicone_run109.xls",
+   "size": 6092800.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_253_13_teflon_run111.xls",
+   "size": 6220800.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_253_14_kapton_run112.xls",
+   "size": 5930496.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_253_14_pyrell_run113.xls",
+   "size": 6268928.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_2010_253_15_kapton_run114.xls",
+   "size": 5825024.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_4K-K01-4 -6x-1y 1350.tif",
+   "size": 547155.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_4K-K01-10 -6x-1y 10k.tif",
+   "size": 606532.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_4K-K01-15 -1x-1y 10k.tif",
+   "size": 634338.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_51 - 4K Kapton.pptx",
+   "size": 1261921.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_K01-4K images.pdf",
+   "size": 8945561.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_K01-4K images.pptx",
+   "size": 19032908.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_62 Postage 15K Kapton.pptx",
+   "size": 1568467.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_62 Post Kapton - linear for image analysis.pptx",
+   "size": 5487298.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_62 pre 15K Kapton.pptx",
+   "size": 1076136.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_62 pre 15K Kapton.pdf",
+   "size": 1023848.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_70-23K Kapton.pdf",
+   "size": 5292539.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_70-23K Kapton.pptx",
+   "size": 11210574.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_73 postage Kapton 26K.pptx",
+   "size": 426321.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_73 preage Kapton 26K.pptx",
+   "size": 940782.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_75 postage Kapton 28K.pptx",
+   "size": 3076542.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_75 preage Kapton 28K.pptx",
+   "size": 750884.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_77 postage Kapton 30K.pptx",
+   "size": 4690013.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_77 preage Kapton 30K.pptx",
+   "size": 4724742.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_85 38K Kapton.pptx",
+   "size": 1576135.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_93 postage 46K Kapton.pptx",
+   "size": 367139.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_93 Preage 46K Kapton.pptx",
+   "size": 756899.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_94 postage 47k Kapton.pptx",
+   "size": 1442904.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_101 postage 54k Kapton.pptx",
+   "size": 815606.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_101 Preage 54K Kapton.pptx",
+   "size": 1956308.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_108 Postage 61K Kapton.pptx",
+   "size": 2079091.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_108 Preage 61K Kapton.pptx",
+   "size": 2241480.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_49 - 2L Lampwick.pptx",
+   "size": 901205.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_L13 images.pdf",
+   "size": 3203423.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_L13 images.pptx",
+   "size": 31178308.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_54 7L Lampwick.pdf",
+   "size": 1608893.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_54 7L Lampwick.pptx",
+   "size": 1649841.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_54 7L Lampwick new names 4-23-12.pptx",
+   "size": 4253960.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_54 Lampwick linear for image analysis.pptx",
+   "size": 5417172.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_55 8L Lampwick.pdf",
+   "size": 1487063.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_55 8L Lampwick.pptx",
+   "size": 4458515.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_68 21L Lampwick.pdf",
+   "size": 4235607.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_68 21L Lampwick.pptx",
+   "size": 8981135.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_78 Postage 31L Lampwick.pptx",
+   "size": 836925.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_78 Preage 31l Lampwick.pptx",
+   "size": 845658.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_80 Preage 33L Lampwick.pptx",
+   "size": 1752731.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_82 Postage 35L Lampwick.pptx",
+   "size": 1821941.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_82 Preage 35 L Lampwick.pptx",
+   "size": 297490.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_96 48L Lampwick.pptx",
+   "size": 1728964.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_98 postage 51l Lampwick.pptx",
+   "size": 1477691.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_98 Preage 51L Lampwick.pptx",
+   "size": 3012371.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_106 - 59L Lampwick.pptx",
+   "size": 2091716.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_New Microsoft Office PowerPoint Presentation.pptx",
+   "size": 27581.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_54 l quarters.pptx",
+   "size": 615007.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_SPV of 54-7L_21 all quarters (3).xlsx",
+   "size": 47188.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_52-5P Pyrell.pdf",
+   "size": 1824143.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_52-5P Pyrell.pptx",
+   "size": 5649952.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_63 Postage Pyrell for image analysis.pptx",
+   "size": 5689372.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_63 Preage Pyrell for image analysis.pptx",
+   "size": 6897849.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_64 Preage Pyrell for image analysis.pptx",
+   "size": 5239509.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_64 Postage Pyrell for image analysis.pptx",
+   "size": 5350396.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_63 Postage 16P Pyrell.pptx",
+   "size": 1635817.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_63 Preage 16P Pyrell.pptx",
+   "size": 1737419.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_64 Postage 17P Pyrell.pptx",
+   "size": 2508070.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_64 preage - 17P Pyrell.pptx",
+   "size": 1749626.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_71 - 24P Pyrell.pptx",
+   "size": 1580310.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_73 preage Kapton (26K).pptx",
+   "size": 4841969.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_74 postage Pyrell 27P.pptx",
+   "size": 5154529.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_74 preage Pyrell 27P.pptx",
+   "size": 412976.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_76 postage Pyrell 29P.pptx",
+   "size": 4086823.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_76 preage Pyrell 29P.pptx",
+   "size": 3091163.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_84 preage Pyrell (37P).pptx",
+   "size": 4843320.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_84 post 37P Pyrell (26K).pptx",
+   "size": 4500394.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_87 - 40P Pyrell.pptx",
+   "size": 2109315.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_95 48P Pyrell.pptx",
+   "size": 668920.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_97 - 50P Pyrell.pptx",
+   "size": 1922135.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_107 Postage 60P Pyrell.pptx",
+   "size": 1613570.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_107 Preage 60P Pyrell.pptx",
+   "size": 1642654.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_53 - 6S Silicone.pptx",
+   "size": 1911407.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_60 13S Silicone.pptx",
+   "size": 4717609.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_67 - 20S Silicone.pptx",
+   "size": 2057323.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_72 25S Silicone.pptx",
+   "size": 1497290.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_50 - 3T Teflon.pptx",
+   "size": 448844.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_T01-3T images.pdf",
+   "size": 3342789.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_T01-3T images.pptx",
+   "size": 6753467.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_56 - 9T teflon.pdf",
+   "size": 2313158.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_56 - 9T teflon.pptx",
+   "size": 2185887.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_58 postage 11T Teflon.pptx",
+   "size": 2024203.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_69 - 22T Teflon.pptx",
+   "size": 1813728.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_79 Postage 32T Teflon.pptx",
+   "size": 681410.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_79 preage Teflon 32T.pptx",
+   "size": 331634.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_83 postage Teflon 36T.pptx",
+   "size": 1343676.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_100 - 53T Teflon.pptx",
+   "size": 688572.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_105 postage 58T Teflon.pptx",
+   "size": 1612238.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_1 Lampwick vlc-record-2010-09-07-16h18m22s-udp___233.1.14.11 _50300-.mp4",
+   "size": 303548579.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_4 lampwick vlc-record-2010-09-08-12h10m02s-udp___233.1.14.5 _50000-.mp4",
+   "size": 279582511.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_2 Kapton vlc-record-2010-09-07-17h19m24s-udp___233.1.14.11 _50300-.mp4",
+   "size": 164650898.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_3 pyrell vlc-record-2010-09-08-11h37m29s-udp___233.1.14.5 _50000-.mp4",
+   "size": 463842635.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt211_2.csv",
+   "size": 694283.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt211_3.csv",
+   "size": 693361.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt211_4.csv",
+   "size": 784824.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_2010_211_13_silcon_run60.xls",
+   "size": 6920704.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt214_1.csv",
+   "size": 680383.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt214_2.csv",
+   "size": 625909.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt235_1.csv",
+   "size": 496614.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt235_2.csv",
+   "size": 934806.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt235_3.csv",
+   "size": 678028.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt235_4.csv",
+   "size": 606228.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt239_1.csv",
+   "size": 779694.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt239_2.csv",
+   "size": 537510.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt239_3.csv",
+   "size": 475594.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt239_4.csv",
+   "size": 519128.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt239_5.csv",
+   "size": 659660.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt238_1.csv",
+   "size": 499714.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt238_3.csv",
+   "size": 511400.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt238_4.csv",
+   "size": 578952.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt238_5.csv",
+   "size": 524152.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt236_1.csv",
+   "size": 521399.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt236_2.csv",
+   "size": 492364.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt236_3.csv",
+   "size": 652132.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt237_1.csv",
+   "size": 576815.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt242_1.csv",
+   "size": 625086.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt242_2.csv",
+   "size": 509413.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt242_3.csv",
+   "size": 300609.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt242_4.csv",
+   "size": 570590.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt242_6_run89.csv",
+   "size": 328895.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt242_7.csv",
+   "size": 464302.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt250_1.csv",
+   "size": 222568.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt250_2.csv",
+   "size": 537394.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt250_3.csv",
+   "size": 639211.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt250_4.csv",
+   "size": 761534.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt250_5.csv",
+   "size": 809057.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt250_6.csv",
+   "size": 303771.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt251_1.csv",
+   "size": 723359.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt251_2.csv",
+   "size": 597910.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt251_3.csv",
+   "size": 620322.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt251_4.csv",
+   "size": 629275.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt251_5.csv",
+   "size": 614400.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt251_6.csv",
+   "size": 654648.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt252_3.csv",
+   "size": 1533648.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt252_4.csv",
+   "size": 508552.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt252_5.csv",
+   "size": 1528232.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_HKPData_gmt252_6.csv",
+   "size": 676593.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_vlc-record-2010-07-30-14h12m08s-udp___233.1.14.7 _50100-.mp4",
+   "size": 970563377.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_vlc-record-2010-07-30-13h25m07s-udp___233.1.14.7 _50100-.mp4",
+   "size": 970563377.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_vlc-record-2010-07-30-15h06m31s-udp___233.1.14.7 _50100-.mp4",
+   "size": 282455755.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_SAME-R_ThermalPrecipitatorUsage.xlsx",
+   "size": 11054.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "SAME_VPRED.pdf",
+   "size": 514219.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_60089MFHD509 P-Trak Condenser Tube Modification.pdf",
+   "size": 162861.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_60089MFHA150-B Aging Chamber Assembly.pdf",
+   "size": 335105.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_60089MFHD126-B Smoke Generation Tube.pdf",
+   "size": 243826.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_60089MFHA417-B Kapton Sample Assembly.pdf",
+   "size": 149738.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_60089MFHA432-A Kapton Ignitor Wire Coil Assembly.pdf",
+   "size": 169403.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_60089MFHA415 Ignitor Wire Coil Assembly (for 0 .250 OD samples).pdf",
+   "size": 98185.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_60089MFHA414-A Lampwick Sample Assembly.pdf",
+   "size": 151181.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_60089MFHP000-C SAME Fluids System Schematic.pdf",
+   "size": 258861.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_S1171MFHA401 Pyrell Sample Assembly.pdf",
+   "size": 154569.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_80089MFHP000-E SAME Fluids System Schematic.pdf",
+   "size": 333332.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_60089MFHA416-A Silicone Sample Assembly.pdf",
+   "size": 152496.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_60089MFHA419 Silicone Ignitor Wire Coil Assembly.pdf",
+   "size": 161926.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_60089MFHA410-A Teflon Sample Assembly.pdf",
+   "size": 156530.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_60089MFHD413 Teflon Sample Part.pdf",
+   "size": 150152.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_60089MFHA411 Teflon Ignitor Wire Coil Assembly.pdf",
+   "size": 175857.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_Fluids Control Unit, Schematic, left side-1.pdf",
+   "size": 1163957.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_80089MFHP000-E SAME Fluids System Schematic, right side-1.pdf",
+   "size": 1611750.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Raw Data_7 kapton vlc-record-2010-09-08-14h26m11s-udp___233.1.14.5 _50000-.mp4",
+   "size": 251700257.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_2 Kapton vlc-record-2010-09-07-17h19m24s-udp___233.1.14.11 _50300-.zip",
+   "size": 28541664.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_7 kapton vlc-record-2010-09-08-14h26m11s-udp___233.1.14.5 _50000-.zip",
+   "size": 41711655.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_vlc-record-2010-07-30-13h25m07s-udp___233.1.14.7 _50100-.zip",
+   "size": 164070472.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_vlc-record-2010-07-30-14h12m08s-udp___233.1.14.7 _50100-.zip",
+   "size": 36068567.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_vlc-record-2010-07-30-15h06m31s-udp___233.1.14.7 _50100-.zip",
+   "size": 47265860.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_1 Lampwick vlc-record-2010-09-07-16h18m22s-udp___233.1.14.11 _50300-.zip",
+   "size": 44787440.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_4 lampwick vlc-record-2010-09-08-12h10m02s-udp___233.1.14.5 _50000-.zip",
+   "size": 41582320.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_SAME-R Flight Ops photos.zip",
+   "size": 41201731.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Raw Data_Run 051 4K Kapton.zip",
+   "size": 10060674.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_62 Postage Kapton linear.zip",
+   "size": 11188395.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_62-preage 15K Kapton.zip",
+   "size": 41931737.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_62_Preage Kapton linear.zip",
+   "size": 13377910.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_70-23K Kapton.zip",
+   "size": 530577.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_73 post 26K Kapton.zip",
+   "size": 787886.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_73 preage Kapton.zip",
+   "size": 1907387.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_75 postage Kapton.zip",
+   "size": 7341213.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_75 preage-28K.zip",
+   "size": 1497816.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_77 post-30K_Kapton.zip",
+   "size": 10880180.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_77preage Kapton.zip",
+   "size": 9968698.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_85-38K Kapton.zip",
+   "size": 3083737.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_94 post 47K.zip",
+   "size": 16286287.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_108 post 61K.zip",
+   "size": 23004474.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#73 mis labeled pyrellpreage 26K Kapton.zip",
+   "size": 66969710.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#73 mislabeled pyrell postage 26K Kapton.zip",
+   "size": 64003333.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#93 Preage 46K Kapton.zip",
+   "size": 8132002.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#93 Postage 46K Kapton.zip",
+   "size": 1906334.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#101 Postage 54K Kapton.zip",
+   "size": 9248880.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#101 Preage 54K Kapton.zip",
+   "size": 22975604.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#108 Preage 61K Kapton.zip",
+   "size": 26765624.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#49 - 2L - Lampwick.zip",
+   "size": 13505560.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_more 54.zip",
+   "size": 960620.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#54 7L Lampwick - new.zip",
+   "size": 6778846.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#54 - 7L - Lampwick.zip",
+   "size": 52423002.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#54 Lampwick linear 5-2-12.zip",
+   "size": 12689807.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#55 - 8L Lampwick High RT_RO.zip",
+   "size": 62839623.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#68 21L Lampwick.zip",
+   "size": 421460.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#78 Preage 31L Lampwick.zip",
+   "size": 1199289.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#78 Postage 31L Lampwick.zip",
+   "size": 1613620.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#80 Postage 33L Lampwick.zip",
+   "size": 539968.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#82 Postage 35L Lampwick.zip",
+   "size": 3032217.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#82 Preage 35L Lampwick.zip",
+   "size": 480179.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#96 - 49L Lampwick.zip",
+   "size": 20510970.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#98 Postage 51L Lampwick.zip",
+   "size": 16112726.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#98 Preage 51L Lampwick.zip",
+   "size": 32561516.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#106 - 59L Lampwick.zip",
+   "size": 26147859.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#55 Lampwick linear 5-2-12.zip",
+   "size": 16395536.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_3 pyrell vlc-record-2010-09-08-11h37m29s-udp___233.1.14.5 _50000-.zip",
+   "size": 76888678.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_# 52 - 5P Pyrell.zip",
+   "size": 2363763.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#63 Postage 16P Pyrell.zip",
+   "size": 17438901.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#63 Preage 16P Pyrell.zip",
+   "size": 18016199.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#64 Postage 17P Pyrell.zip",
+   "size": 28890260.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#64 preage - 16P - Pyrell.zip",
+   "size": 47180218.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#71 - 24P Pyrell.zip",
+   "size": 19490799.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#74 Postage 27P Pyrell.zip",
+   "size": 11461931.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#74 Preage 27P Pyrell.zip",
+   "size": 651421.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#76 postage 29P Pyrell.zip",
+   "size": 7913530.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#76 preage 29P Pyrell.zip",
+   "size": 1497112.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#84 post-age 37P Pyrell.zip",
+   "size": 64003129.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#84 pre-age 37P Pyrell.zip",
+   "size": 66969662.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#87 - 40P Pyrell.zip",
+   "size": 24626532.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#95 - 48P Pyrell.zip",
+   "size": 7108991.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#97 - 50P Pyrell.zip",
+   "size": 22559031.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#107 Postage 60P Pyrell.zip",
+   "size": 20550719.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#107 Preage 60P Pyrell.zip",
+   "size": 22615239.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_# 53 - 65 Silicone.zip",
+   "size": 23031718.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#60 13S Silicone.zip",
+   "size": 7420141.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#67 - 20S Silicone.zip",
+   "size": 23163931.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#72 - 25S Silicone.zip",
+   "size": 17862299.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#50 - 3T - Teflon.zip",
+   "size": 2885115.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#56 - 9T - Teflon.zip",
+   "size": 47644631.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#58 Postage 11T Teflon.zip",
+   "size": 23968084.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#69 - 22T Teflon.zip",
+   "size": 22813158.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#79 Postage 32T Teflon.zip",
+   "size": 1266188.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#79 Preage 32T Teflon.zip",
+   "size": 1275395.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#81 post age Teflon (34T).zip",
+   "size": 8735441.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#81 preage Teflon (34T).zip",
+   "size": 21770770.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#83 post age Teflon (36T).zip",
+   "size": 15145945.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#100 - 53T Teflon.zip",
+   "size": 8155276.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Raw Data_#105 postage 58T Teflon.zip",
+   "size": 3032821.0,
+   "category": "Raw Data"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_SAME_Wire_Report.pdf",
+   "size": 1852991.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Engineering Documents_SAME_Wire_Test.xls",
+   "size": 297984.0,
+   "category": "Engineering Documents"
+  },
+  {
+   "name": "PSI-101_Analyzed Data_SAME, SAME-R_Results.xlsx",
+   "size": 4061669.0,
+   "category": "Analyzed Data"
+  },
+  {
+   "name": "PSI-101_Science Documents_SAME_Baseline Concept Description Document_001 Rev A.pdf",
+   "size": 247315.0,
+   "category": "Science Documents"
+  },
+  {
+   "name": "PSI-101_Science Documents_SAME_Operations Manual_007.pdf",
+   "size": 699811.0,
+   "category": "Science Documents"
+  },
+  {
+   "name": "PSI-101_Reference Data_SAME_Software Description Document_003 Rev A.pdf",
+   "size": 270540.0,
+   "category": "Reference Data"
+  },
+  {
+   "name": "PSI-101_Reference Data_SAME_Software Requirement Document_004 Rev D.pdf",
+   "size": 400833.0,
+   "category": "Reference Data"
+  }
+ ],
+ "experimentalTables": [
+  {
+   "file": "PSI-101_Experimental table_SAME-R.csv",
+   "version": 1
+  }
+ ],
+ "searchInfo": {
+  "accession": "PSI-101",
+  "title": "Smoke Aerosol Measurement Experiment-Reflight",
+  "projectType": "Microgravity Investigation",
+  "subResearchArea": "Spacecraft Fire Safety"
+ },
+ "tablesDownloaded": [
+  {
+   "file": "PSI-101_Experimental table_SAME-R.csv",
+   "bytes": 5674
+  }
+ ]
+}

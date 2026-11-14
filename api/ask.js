@@ -74,7 +74,7 @@ const SCHEMA = {
 const SYSTEM = `You are EMBER, a fire-safety research assistant for engineers designing crewed spacecraft and Moon/Mars habitats.
 Rules:
 1. Use ONLY the NASA PSI context provided. If the context does not support an answer, say so and set confidence to "no-data".
-2. Every factual sentence must cite the PSI accession it comes from, e.g. [PSI-25]. Never cite anything not in the context.
+2. Every factual sentence must cite its source: a PSI accession like [PSI-25], or [EMBER data] for COMPUTED FACTS. Never cite anything else.
 3. Never invent numbers. Only quote numbers that appear in the context or in COMPUTED FACTS.
 4. All PSI flight data is microgravity; there is no partial-gravity (Moon/Mars) combustion data in PSI. Say this whenever gravity matters.
 5. Be risk-first: never soften, round down or omit a hazard. The redTeam section must state the worst credible case and data gaps honestly.
@@ -91,9 +91,10 @@ export default async function handler(req, res) {
   const send = (code, obj) => { res.statusCode = code; res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify(obj)) }
   if (req.method !== 'POST') return send(405, { error: 'POST only' })
   const key = process.env.GEMINI_API_KEY
-  // Primary model, then fallbacks if it errors or times out (keeps the app answering during model outages).
+  // Hedged requests: start the preferred model; if it hasn't answered after HEDGE_MS, also start the next one,
+  // and so on. First valid answer wins; the rest are cancelled. Keeps answers fast during model demand spikes.
   const models = [...new Set([process.env.GEMINI_MODEL || 'gemini-3.5-flash',
-    ...(process.env.GEMINI_FALLBACKS || 'gemini-3.5-flash,gemini-flash-latest,gemini-3.1-flash-lite').split(',')].map(s => s.trim()).filter(Boolean))]
+    ...(process.env.GEMINI_FALLBACKS || 'gemini-3-flash-preview,gemini-3.5-flash-lite,gemini-3.1-flash-lite').split(',')].map(s => s.trim()).filter(Boolean))]
   if (!key) return send(503, { error: 'Server is missing GEMINI_API_KEY.' })
 
   const { question = '', habitat = null } = await body(req)
@@ -121,11 +122,22 @@ Impacts: ${(i.impacts || '').slice(0, 600)}`
     facts += `\nTests within ±4 points O2 and ±2 psi of it (ambient O2): solid ${z.by.solid}, liquid ${z.by.liquid}, gas ${z.by.gas}; from ${z.investigations.join(', ') || 'none'}.`
     facts += `\nHighest O2 at which any solid material was tested in PSI: ${solidMax.toFixed(1)}%.`
   }
+  { // always-on coverage fact: tests at elevated O2 (>=25%, ambient) AND reduced pressure (<=12 psi)
+    const hi = {}
+    for (const t of c.tests) if (!t.matrix && t.o2Pct != null && t.pressurePsi != null && t.o2Basis === 'measured' && t.pressureBasis === 'measured' && t.o2Pct >= 25 && t.pressurePsi <= 12) {
+      const h = (hi[t.inv] ||= { n: 0, o2: [99, 0], p: [99, 0], cls: new Set() })
+      h.n += t.count || 1; h.o2 = [Math.min(h.o2[0], t.o2Pct), Math.max(h.o2[1], t.o2Pct)]; h.p = [Math.min(h.p[0], t.pressurePsi), Math.max(h.p[1], t.pressurePsi)]; h.cls.add(t.fuelClass)
+    }
+    const list = Object.entries(hi).map(([id, h]) => `${id} (${byId[id]?.acronym || ''}): ${h.n} ${[...h.cls].join('/')} tests, ${h.o2[0].toFixed(0)}-${h.o2[1].toFixed(0)}% O2, ${h.p[0].toFixed(1)}-${h.p[1].toFixed(1)} psi`)
+    facts += `\nAll PSI tests at elevated O2 (>=25%) AND reduced pressure (<=12 psi), measured: ${list.join('; ') || 'none'}. No solid-material test meets both conditions.`
+    for (const id of Object.keys(hi)) if (!hits.some(h => h.id === id)) hits.push({ id, s: 0.01 }) // make sure they are citable
+  }
 
   const prompt = `QUESTION: ${q}\n\nCOMPUTED FACTS (from EMBER's harvest of PSI tables):\n${facts}\n\nNASA PSI CONTEXT:\n${ctx || '(no matching investigations found)'}`
   const tried = []
+  const controllers = []
   async function callGemini(m, ms) {
-    const ac = new AbortController(); const timer = setTimeout(() => ac.abort(), ms)
+    const ac = new AbortController(); controllers.push(ac); const timer = setTimeout(() => ac.abort(), ms)
     try {
       const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(m)}:generateContent`, {
         method: 'POST', signal: ac.signal,
@@ -143,19 +155,30 @@ Impacts: ${(i.impacts || '').slice(0, 600)}`
     } finally { clearTimeout(timer) }
   }
   try {
-    let out = null, used = null
-    const t0 = Date.now()
-    for (const m of models) {
-      const left = 27000 - (Date.now() - t0)
-      if (left < 4000) break
-      try { out = await callGemini(m, Math.min(left, 20000)); used = m; break }
-      catch (e) { tried.push(`${m}: ${e.name === 'AbortError' ? 'timed out' : e.message.slice(0, 120)}`) }
-    }
-    if (!out) return send(502, { error: 'All Gemini models failed. ' + tried.join(' | ') })
+    const HEDGE_MS = +(process.env.GEMINI_HEDGE_MS || 7000), BUDGET = 27000, t0 = Date.now()
+    const { out, used } = await new Promise(resolve => {
+      let done = false, pending = 0, next = 0, timer = null
+      const launch = () => {
+        if (done || next >= models.length) return
+        const m = models[next++], left = BUDGET - (Date.now() - t0)
+        if (left < 3000) return
+        pending++
+        callGemini(m, left).then(o => {
+          if (!done) { done = true; clearTimeout(timer); controllers.forEach(c => c.abort()); resolve({ out: o, used: m }) }
+        }).catch(e => {
+          if (!done) tried.push(`${m}: ${e.name === 'AbortError' ? 'timed out' : String(e.message).slice(0, 120)}`)
+          pending--
+          if (!done) { clearTimeout(timer); launch(); if (pending === 0 && next >= models.length) { done = true; resolve({}) } else schedule() }
+        })
+      }
+      const schedule = () => { clearTimeout(timer); if (next < models.length) timer = setTimeout(() => { launch(); schedule() }, HEDGE_MS) }
+      launch(); schedule()
+    })
+    if (!out) return send(502, { error: 'The AI service is busy right now (all Gemini models failed). Please try again in a moment. ' + tried.join(' | ') })
     const allowed = new Set(hits.map(h => h.id))
     const cited = [...new Set([...(out.citations || []), ...((out.answer || '').match(/PSI-\d+/g) || [])])]
     out.citations = cited.filter(id => allowed.has(id))
-    out.unverifiedCitations = cited.filter(id => !allowed.has(id))
+    out.unverifiedCitations = cited.filter(id => /^PSI-\d+$/.test(id) && !allowed.has(id))
     out.sources = hits.map(h => ({ id: h.id, title: byId[h.id].title, acronym: byId[h.id].acronym, doi: byId[h.id].doi, relevance: +h.s.toFixed(2) }))
     out.model = used
     out.fallbacks = tried

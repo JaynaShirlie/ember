@@ -69,6 +69,8 @@ tests = []
 
 def add(inv, table, i, **r):
     r.setdefault("count", 1)
+    if r.get("pressurePsi") is None and r.get("pressureBasis") in ("measured", "test-matrix"): r["pressureBasis"] = "not-in-table"
+    if r.get("o2Pct") is None and r.get("o2Basis") in ("measured", "test-matrix"): r["o2Basis"] = "not-in-table"
     r.update(inv=inv, table=table, row=int(i))
     r["id"] = f"{inv}:{table}:{i}"
     tests.append(r)

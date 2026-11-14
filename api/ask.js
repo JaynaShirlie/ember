@@ -91,7 +91,9 @@ export default async function handler(req, res) {
   const send = (code, obj) => { res.statusCode = code; res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify(obj)) }
   if (req.method !== 'POST') return send(405, { error: 'POST only' })
   const key = process.env.GEMINI_API_KEY
-  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash'
+  // Primary model, then fallbacks if it errors or times out (keeps the app answering during model outages).
+  const models = [...new Set([process.env.GEMINI_MODEL || 'gemini-3.5-flash',
+    ...(process.env.GEMINI_FALLBACKS || 'gemini-3.5-flash,gemini-flash-latest,gemini-3.1-flash-lite').split(',')].map(s => s.trim()).filter(Boolean))]
   if (!key) return send(503, { error: 'Server is missing GEMINI_API_KEY.' })
 
   const { question = '', habitat = null } = await body(req)
@@ -121,26 +123,42 @@ Impacts: ${(i.impacts || '').slice(0, 600)}`
   }
 
   const prompt = `QUESTION: ${q}\n\nCOMPUTED FACTS (from EMBER's harvest of PSI tables):\n${facts}\n\nNASA PSI CONTEXT:\n${ctx || '(no matching investigations found)'}`
+  const tried = []
+  async function callGemini(m, ms) {
+    const ac = new AbortController(); const timer = setTimeout(() => ac.abort(), ms)
+    try {
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(m)}:generateContent`, {
+        method: 'POST', signal: ac.signal,
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: SYSTEM }] },
+          contents: [{ role: 'user', parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.2, responseMimeType: 'application/json', responseSchema: SCHEMA },
+        }),
+      })
+      const j = await r.json()
+      if (!r.ok) throw new Error(j.error?.message || `HTTP ${r.status}`)
+      const text = j.candidates?.[0]?.content?.parts?.filter(p => !p.thought).map(p => p.text).join('') || ''
+      return JSON.parse(text)
+    } finally { clearTimeout(timer) }
+  }
   try {
-    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: SYSTEM }] },
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.2, responseMimeType: 'application/json', responseSchema: SCHEMA },
-      }),
-    })
-    const j = await r.json()
-    if (!r.ok) return send(502, { error: j.error?.message || 'Gemini request failed' })
-    const text = j.candidates?.[0]?.content?.parts?.map(p => p.text).join('') || '{}'
-    const out = JSON.parse(text)
+    let out = null, used = null
+    const t0 = Date.now()
+    for (const m of models) {
+      const left = 27000 - (Date.now() - t0)
+      if (left < 4000) break
+      try { out = await callGemini(m, Math.min(left, 20000)); used = m; break }
+      catch (e) { tried.push(`${m}: ${e.name === 'AbortError' ? 'timed out' : e.message.slice(0, 120)}`) }
+    }
+    if (!out) return send(502, { error: 'All Gemini models failed. ' + tried.join(' | ') })
     const allowed = new Set(hits.map(h => h.id))
     const cited = [...new Set([...(out.citations || []), ...((out.answer || '').match(/PSI-\d+/g) || [])])]
     out.citations = cited.filter(id => allowed.has(id))
     out.unverifiedCitations = cited.filter(id => !allowed.has(id))
     out.sources = hits.map(h => ({ id: h.id, title: byId[h.id].title, acronym: byId[h.id].acronym, doi: byId[h.id].doi, relevance: +h.s.toFixed(2) }))
-    out.model = model
+    out.model = used
+    out.fallbacks = tried
     out.facts = facts
     return send(200, out)
   } catch (e) {

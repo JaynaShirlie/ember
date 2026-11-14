@@ -72,7 +72,7 @@ nav.tabs button.on { color: var(--ink); border-color: var(--amber) }
 .btn:disabled { opacity: .5; cursor: default }
 select, textarea, input[type=text] { background: var(--bg2); border: 1px solid var(--line2); border-radius: 9px; padding: 7px 10px }
 .canvas3d { height: 70vh; min-height: 460px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: #03050b; position: relative }
-.overlay { position: absolute; left: 12px; top: 10px; pointer-events: none; font-size: 12px; color: var(--muted) }
+.overlay { z-index: 2; position: absolute; left: 12px; top: 10px; pointer-events: none; font-size: 12px; color: var(--muted) }
 .legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--muted) }
 .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px }
 svg text { font-family: Poppins, sans-serif }

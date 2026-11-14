@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Html } from '@react-three/drei'
 import * as THREE from 'three'
@@ -6,6 +6,24 @@ import * as THREE from 'three'
 // Schematic (not to scale) 3D twin of the FLEX droplet-combustion setup: MDCA inside the CIR chamber.
 // Geometry is representative; every number shown (droplet size, burning rate, extinction, atmosphere)
 // comes from the selected FLEX test row in NASA PSI-69.
+
+const glowTex = (() => {
+  const c = document.createElement('canvas'); c.width = c.height = 128
+  const g = c.getContext('2d'); const r = g.createRadialGradient(64, 64, 0, 64, 64, 64)
+  r.addColorStop(0, 'rgba(255,255,255,0.9)'); r.addColorStop(0.35, 'rgba(255,255,255,0.45)'); r.addColorStop(0.6, 'rgba(255,255,255,0.12)'); r.addColorStop(1, 'rgba(255,255,255,0)')
+  g.fillStyle = r; g.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c)
+})()
+
+function FlameShell({ radius, color, intensity }) {
+  const mat = useMemo(() => new THREE.ShaderMaterial({
+    uniforms: { uColor: { value: new THREE.Color(color) }, uI: { value: intensity } },
+    vertexShader: 'varying vec3 vN; varying vec3 vV; void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); vN = normalize(normalMatrix*normal); vV = normalize(-mv.xyz); gl_Position = projectionMatrix*mv; }',
+    fragmentShader: 'uniform vec3 uColor; uniform float uI; varying vec3 vN; varying vec3 vV; void main(){ float f = 1.0 - abs(dot(vN, vV)); float a = pow(f, 2.6) * uI * 0.75 + 0.05 * uI; gl_FragColor = vec4(uColor * (0.55 + 0.7 * f), a); }',
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide,
+  }), [])
+  mat.uniforms.uColor.value.set(color); mat.uniforms.uI.value = intensity
+  return <mesh material={mat}><sphereGeometry args={[Math.max(0.001, radius), 64, 64]} /></mesh>
+}
 
 const PARTS = {
   chamber: { name: 'Combustion chamber (CIR)', text: 'The Combustion Integrated Rack (CIR) of the Fluids and Combustion Facility holds a sealed chamber filled with a controlled atmosphere. FLEX set the pressure (≈0.5–1.5 atm) and the O₂, N₂, CO₂ and He mole fractions for each test, as listed in the experimental table.' },
@@ -29,13 +47,15 @@ function Scene({ test, t, sel, setSel }) {
   const d = Math.sqrt(d2)
   const extinct = test.dext != null && d <= test.dext
   const burning = d > 0.02 && !extinct
-  const S = 0.55 // scene units per mm
-  const flameR = (burning ? d * 2.6 : 0) * S // representative standoff ~5.2 diameters
-  const flicker = useRef()
-  useFrame(({ clock }) => { if (flicker.current) flicker.current.material.opacity = burning ? 0.55 + 0.08 * Math.sin(clock.elapsedTime * 9) : 0 })
-  const glowCol = test.co2 > 0.05 ? '#5a8cff' : '#4f8de8'
+  const S = 1.9 / (d0 * 2.6) // scale each test so its initial flame fits the chamber; true sizes are shown in mm
+  const dropR = d * S / 2
+  const flameR = (burning ? d * 2.6 : 0) * S // representative standoff ≈ 5 droplet diameters (illustrative)
+  const [flick, setFlick] = useState(1.4)
+  useFrame(({ clock }) => setFlick(1.4 + 0.12 * Math.sin(clock.elapsedTime * 9)))
+  const heptane = /hept/i.test(test.fuel || '')
+  const glowCol = test.co2 > 0.05 ? '#6f95ff' : '#4f8de8'
   return <>
-    <Part id="chamber" sel={sel} setSel={setSel}>{h => <mesh rotation={[0, 0, 0]}><cylinderGeometry args={[4, 4, 6.4, 48, 1, true]} /><meshStandardMaterial color={h ? '#7fd3f7' : '#3a4e78'} transparent opacity={h ? 0.16 : 0.08} side={THREE.DoubleSide} /></mesh>}</Part>
+    <Part id="chamber" sel={sel} setSel={setSel}>{h => <mesh rotation={[0, 0, 0]}><cylinderGeometry args={[4.4, 4.4, 6.4, 48, 1, true]} /><meshStandardMaterial color={h ? '#7fd3f7' : '#3a4e78'} transparent opacity={h ? 0.16 : 0.08} side={THREE.DoubleSide} depthWrite={false} /></mesh>}</Part>
     <mesh position={[0, 3.2, 0]} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[4, 0.04, 8, 64]} /><meshBasicMaterial color="#3a4e78" /></mesh>
     <mesh position={[0, -3.2, 0]} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[4, 0.04, 8, 64]} /><meshBasicMaterial color="#3a4e78" /></mesh>
     <Part id="needles" sel={sel} setSel={setSel}>{h => <group>
@@ -44,10 +64,11 @@ function Scene({ test, t, sel, setSel }) {
     <Part id="igniters" sel={sel} setSel={setSel}>{h => <group>
       {[-1, 1].map(s => <mesh key={s} position={[0, s * (t < 0.4 ? 0.9 : 2.4), 0.6]}><torusGeometry args={[0.18, 0.03, 8, 24]} /><meshStandardMaterial color={t < 0.4 ? '#ff7a3d' : h ? '#f2a541' : '#7c87a0'} emissive={t < 0.4 ? '#ff4d00' : '#000'} /></mesh>)}
     </group>}</Part>
-    <Part id="droplet" sel={sel} setSel={setSel}>{h => <mesh><sphereGeometry args={[Math.max(0.02, d * S / 2), 32, 32]} /><meshStandardMaterial color={h ? '#ffe2a8' : '#e9d9b5'} roughness={0.15} metalness={0.1} /></mesh>}</Part>
+    <Part id="droplet" sel={sel} setSel={setSel}>{h => <mesh><sphereGeometry args={[Math.max(0.02, dropR), 32, 32]} /><meshStandardMaterial color={h ? '#ffe2a8' : '#e9d9b5'} roughness={0.15} metalness={0.1} /></mesh>}</Part>
     <Part id="flame" sel={sel} setSel={setSel}>{h => <group>
-      <mesh ref={flicker}><sphereGeometry args={[Math.max(0.001, flameR), 48, 48]} /><meshBasicMaterial color={h ? '#a9d4ff' : glowCol} transparent opacity={0.55} side={THREE.BackSide} blending={THREE.AdditiveBlending} depthWrite={false} /></mesh>
-      <mesh><sphereGeometry args={[Math.max(0.001, flameR * 0.96), 48, 48]} /><meshBasicMaterial color="#1d3f8f" transparent opacity={burning ? 0.25 : 0} blending={THREE.AdditiveBlending} depthWrite={false} /></mesh>
+      <FlameShell radius={flameR} color={h ? '#bfe0ff' : glowCol} intensity={burning ? flick : 0} />
+      <sprite scale={[flameR * 2.7 + 0.001, flameR * 2.7 + 0.001, 1]}><spriteMaterial map={glowTex} color={glowCol} transparent opacity={burning ? 0.22 : 0} blending={THREE.AdditiveBlending} depthWrite={false} /></sprite>
+      {heptane && <sprite scale={[dropR * 4 + 0.001, dropR * 4 + 0.001, 1]}><spriteMaterial map={glowTex} color="#ffb347" transparent opacity={burning ? 0.35 : 0} blending={THREE.AdditiveBlending} depthWrite={false} /></sprite>}
     </group>}</Part>
     <Part id="cameras" sel={sel} setSel={setSel}>{h => <group>
       {[[0, 0, 4.6], [4.6, 0, 0], [-3.3, 0, -3.3]].map((p, i) => <mesh key={i} position={p}><boxGeometry args={[0.7, 0.5, 0.9]} /><meshStandardMaterial color={h ? '#f2a541' : '#2a3a5c'} /></mesh>)}
@@ -63,7 +84,7 @@ export default function Twin({ data }) {
   const [t, setT] = useState(0)
   const [play, setPlay] = useState(true)
   const raw = flex[idx]
-  const test = { d0: raw.out.d0_mm, K: raw.out.K_mm2s, dext: raw.out.dext_mm, co2: raw.co2 || 0, he: raw.he || 0 }
+  const test = { d0: raw.out.d0_mm, K: raw.out.K_mm2s, dext: raw.out.dext_mm, co2: raw.co2 || 0, he: raw.he || 0, fuel: raw.fuel }
   const tEnd = test.dext != null ? (test.d0 ** 2 - test.dext ** 2) / test.K : test.d0 ** 2 / test.K
   const tShow = Math.min(t, tEnd)
   const dNow = Math.sqrt(Math.max(0, test.d0 ** 2 - test.K * tShow))
@@ -85,7 +106,7 @@ export default function Twin({ data }) {
     <div className="grid-main">
       <div className="canvas3d">
         <div className="overlay">Schematic 3D twin (not to scale) · click any part · playback uses this test's measured values</div>
-        <Canvas camera={{ position: [5.5, 3.2, 7.5], fov: 45 }} onPointerMissed={() => {}}>
+        <Canvas camera={{ position: [5.2, 2.8, 7.2], fov: 45 }} gl={{ preserveDrawingBuffer: true }}>
           <color attach="background" args={['#03050b']} />
           <ambientLight intensity={0.5} /><directionalLight position={[5, 8, 5]} intensity={0.9} />
           <Scene test={test} t={tShow} sel={sel} setSel={setSel} />

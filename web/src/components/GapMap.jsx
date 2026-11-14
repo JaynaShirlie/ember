@@ -8,8 +8,13 @@ export default function GapMap({ data, hab, onPick }) {
   const [showAssumed, setShowAssumed] = useState(true)
   const [showInverse, setShowInverse] = useState(false)
   const [hover, setHover] = useState(null)
-  const tol = { o2: 4, psi: 2 }
-  const zone = useMemo(() => zoneStats(data.tests, hab, tol.o2, tol.psi), [data, hab])
+  const [tol, setTol] = useState({ o2: 4, psi: 2 })
+  const zone = useMemo(() => zoneStats(data.tests, hab, tol.o2, tol.psi), [data, hab, tol])
+  // robustness: how far must the zone grow before the first solid-material test appears?
+  const firstSolid = useMemo(() => {
+    for (let m = 1; m <= 6; m += 0.25) { const z = zoneStats(data.tests, hab, 4 * m, 2 * m); if (z.by.solid > 0) return { o2: 4 * m, psi: 2 * m, z } }
+    return null
+  }, [data, hab])
 
   // aggregate points by (inv, class, rounded O2, rounded psi) so the chart stays readable
   const pts = useMemo(() => {
@@ -76,7 +81,11 @@ export default function GapMap({ data, hab, onPick }) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
         <div className="panel">
           <h2>Inside the {hab.name} zone</h2>
-          <div className="dim small">±{tol.o2} points O₂, ±{tol.psi} psi around {hab.o2}% / {hab.psi} psi · ambient O₂ only</div>
+          <div className="dim small">Zone = ±{tol.o2} points O₂, ±{tol.psi} psi around {hab.o2}% / {hab.psi} psi · ambient O₂ only</div>
+          <label className="slider" style={{ marginTop: 8 }}><span>Zone width O₂ <b>±{tol.o2}</b> points</span>
+            <input type="range" min="1" max="12" step="0.5" value={tol.o2} onChange={e => setTol({ ...tol, o2: +e.target.value })} /></label>
+          <label className="slider"><span>Zone width pressure <b>±{tol.psi}</b> psi</span>
+            <input type="range" min="0.5" max="8" step="0.5" value={tol.psi} onChange={e => setTol({ ...tol, psi: +e.target.value })} /></label>
           <div className="stat" style={{ marginTop: 8 }}>{zone.total}</div><div className="muted small">tests in total</div>
           {['solid', 'liquid', 'gas'].map(c => (
             <div key={c} style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8 }}>
@@ -91,6 +100,8 @@ export default function GapMap({ data, hab, onPick }) {
           {zone.by.solid === 0
             ? <p className="small"><b className="alert">No solid-material test</b> (fabrics, plastics: the materials that actually burn in a cabin) has been run near this atmosphere. Every solid sample in PSI was burned at ≤ {solidMax.toFixed(1)}% O₂ and cabin pressure. Evidence here comes only from {zone.total ? 'gas flames and fuel droplets' : 'nothing at all'}, so material-flammability conclusions for this habitat are <b>extrapolations</b>.</p>
             : <p className="small">{zone.by.solid} solid-material tests fall near this atmosphere. Open them in the Atlas to see conditions and outcomes.</p>}
+          {zone.by.solid === 0 && firstSolid && <p className="small">Robustness: the zone must widen to <b>±{firstSolid.o2} points O₂ and ±{firstSolid.psi} psi</b> before the first solid test appears ({firstSolid.z.by.solid} tests, from {firstSolid.z.invs.filter(a => data.tests.some(t => t.inv === a && t.fuelClass === 'solid')).map(a => acr[a]).join(', ')}).</p>}
+          {zone.by.solid === 0 && !firstSolid && <p className="small">Robustness: even a zone 6× wider contains no solid-material test.</p>}
           <p className="small muted">NASA's FM2 experiment (targeted late 2026) plans to burn solid samples on the Moon at lunar-habitat atmosphere: exactly this gap. EMBER re-harvests PSI nightly so new data appears here when released.</p>
         </div>
       </div>

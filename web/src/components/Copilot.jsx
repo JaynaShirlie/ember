@@ -1,99 +1,128 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { createConversation } from '../lib/voice2.js'
 import { createVoice, voiceSupported } from '../lib/voice.js'
 
 // EMBER copilot: agentic assistant (Gemini function calling, tools run on real data in the browser)
-// with always-on "Hey Ember" voice mode and barge-in. SI disclosure: written with assistance from Claude (Anthropic).
-const TOOL_LABEL = { set_scenario: 'Set scenario', navigate: 'Opened view', explore_3d: '3D explorer', what_if: 'What-if analysis', search_psi: 'Searched PSI',
-  get_investigation: 'Opened investigation', gap_stats: 'Gap analysis', rank_for_scenario: 'Ranked evidence', next_best_experiments: 'Next-best experiments', compare: 'Compare' }
+// with an always-on conversation mode ("Hey Ember"), ElevenLabs voice, barge-in and queued turns.
+// SI disclosure: written with assistance from Claude (Anthropic).
+export const USER_NAME = 'Jayna'
+const TOOL_LABEL = { set_scenario: 'Setting scenario', navigate: 'Opening view', explore_3d: 'Opening 3D explorer', what_if: 'Running what-if', search_psi: 'Searching PSI',
+  get_investigation: 'Opening investigation', gap_stats: 'Analysing gaps', rank_for_scenario: 'Ranking evidence', next_best_experiments: 'Finding next-best experiments', compare: 'Comparing' }
+const STATUS_Q = /\b(are you (still )?(working|there|on it|done)|still working|status|how long|what are you doing|you there)\b/i
+const STOP_Q = /^(stop|cancel|never ?mind|forget it|be quiet|quiet|shut up)\b/i
+const FOLLOW_MS = 20000
 
-function readPref(k, d) { try { return localStorage.getItem(k) ?? d } catch { return d } }
-function writePref(k, v) { try { localStorage.setItem(k, v) } catch {} }
-
-export default function Copilot({ executors }) {
+export default function Copilot({ executors, voiceOn, setVoiceOn, onVoiceState }) {
   const [open, setOpen] = useState(false)
-  const [log, setLog] = useState([])            // {who:'you'|'ember'|'tool', text}
+  const [log, setLog] = useState([])
   const [busy, setBusy] = useState(false)
   const [input, setInput] = useState('')
-  const [vstate, setVstate] = useState('idle')  // idle | listening | speaking | thinking | denied
-  const [interim, setInterim] = useState('')
-  const [address, setAddress] = useState(() => readPref('ember-address', ''))
-  const contents = useRef([]), sticky = useRef(null), voice = useRef(null), logEnd = useRef(null)
+  const [vstate, setVstate] = useState('idle')
+  const [interim, setInterim] = useState(null)
+  const contents = useRef([]), sticky = useRef(null), conv = useRef(null), logEnd = useRef(null)
+  const busyRef = useRef(false), queue = useRef([]), stepRef = useRef('thinking'), followUntil = useRef(0)
   const execRef = useRef(executors); execRef.current = executors
-  const addrRef = useRef(address); addrRef.current = address
 
-  const push = (who, text) => setLog(l => [...l.slice(-60), { who, text, at: Date.now() }])
+  const push = (who, text) => setLog(l => [...l.slice(-60), { who, text }])
   useEffect(() => { logEnd.current?.scrollIntoView({ block: 'end' }) }, [log, interim])
+  useEffect(() => { onVoiceState?.(vstate) }, [vstate])
+  const say = t => { if (conv.current?.enabled) conv.current.speak(t) }
 
   async function post(mode) {
     const r = await fetch('/api/agent', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: contents.current, mode, address: addrRef.current, model: sticky.current }) })
+      body: JSON.stringify({ contents: contents.current, mode, address: USER_NAME, model: sticky.current }) })
     const j = await r.json().catch(() => ({}))
     if (!r.ok) throw new Error(j.error || `HTTP ${r.status}`)
     return j
   }
 
   async function turn(text, mode) {
-    if (!text.trim()) return
-    push('you', text); setBusy(true); setVstate(v => (v === 'denied' ? v : 'thinking'))
+    busyRef.current = true; setBusy(true); stepRef.current = 'thinking it through'
     contents.current.push({ role: 'user', parts: [{ text }] })
     try {
       for (let step = 0; step < 6; step++) {
         let j
         try { j = await post(mode) } catch (e) {
           if (!sticky.current) throw e
-          sticky.current = null; contents.current = [{ role: 'user', parts: [{ text }] }]; j = await post(mode) // model switched: restart context cleanly
+          sticky.current = null; contents.current = [{ role: 'user', parts: [{ text }] }]; j = await post(mode)
         }
         sticky.current = j.model
         contents.current.push(j.content)
         const calls = j.content.parts.filter(p => p.functionCall)
         if (!calls.length) {
           const reply = j.content.parts.filter(p => p.text && !p.thought).map(p => p.text).join('').trim() || 'Done.'
-          push('ember', reply)
-          if (mode === 'voice' && voice.current) voice.current.speak(reply)
-          else setVstate(voice.current?.enabled ? 'listening' : 'idle')
+          push('ember', reply); say(reply); followUntil.current = Date.now() + FOLLOW_MS
           break
         }
         const responses = []
         for (const { functionCall: fc } of calls) {
+          stepRef.current = (TOOL_LABEL[fc.name] || fc.name).toLowerCase()
           let result
-          try { result = execRef.current[fc.name] ? await execRef.current[fc.name](fc.args || {}) : { error: 'unknown tool' } }
-          catch (e) { result = { error: String(e.message || e) } }
-          push('tool', `${TOOL_LABEL[fc.name] || fc.name}${fc.args?.investigation || fc.args?.id ? ' · ' + (fc.args.investigation || fc.args.id) : ''}${fc.args?.preset ? ' · ' + fc.args.preset : ''}${fc.args?.target ? ' · ' + fc.args.target : ''}`)
+          try { result = execRef.current[fc.name] ? await execRef.current[fc.name](fc.args || {}) : { error: 'unknown tool' } } catch (e) { result = { error: String(e.message || e) } }
+          push('tool', `${TOOL_LABEL[fc.name] || fc.name}${fc.args?.investigation || fc.args?.id ? ' · ' + (fc.args.investigation || fc.args.id) : ''}${fc.args?.preset ? ' · ' + fc.args.preset : ''}${fc.args?.target && fc.args.target !== 'experiment' ? ' · ' + fc.args.target : ''}`)
           responses.push({ functionResponse: { name: fc.name, response: { result } } })
         }
         contents.current.push({ role: 'user', parts: responses })
       }
     } catch (e) {
-      push('ember', 'I could not reach the AI service just now. ' + String(e.message || e))
-      setVstate(voice.current?.enabled ? 'listening' : 'idle')
+      const m = 'I could not reach the AI service just now. Please try again.'
+      push('ember', m + ' (' + String(e.message || e).slice(0, 120) + ')'); say(m)
     } finally {
-      setBusy(false)
-      if (contents.current.length > 40) { // trim old history at a clean user-text boundary
+      busyRef.current = false; setBusy(false)
+      if (contents.current.length > 40) {
         const i = contents.current.findIndex((c, k) => k > contents.current.length - 24 && c.role === 'user' && c.parts.some(p => p.text))
         if (i > 0) contents.current = contents.current.slice(i)
       }
+      const next = queue.current.shift(); if (next) { push('you', next.text); turn(next.text, next.mode) }
     }
   }
 
-  const supported = useMemo(() => voiceSupported(), [])
-  function toggleVoice() {
-    if (voice.current?.enabled) { voice.current.stop(); voice.current = null; setVstate('idle'); return }
-    voice.current = createVoice({
+  function submit(text, mode) {
+    const t = text.trim(); if (!t) return
+    if (STOP_Q.test(t)) { conv.current?.stopSpeaking(); queue.current = []; push('you', t); push('ember', 'Okay, stopped.'); return }
+    if (busyRef.current && STATUS_Q.test(t)) { push('you', t); const r = `Still on it, ${USER_NAME}. I'm ${stepRef.current}.`; push('ember', r); say(r); return }
+    if (busyRef.current) { queue.current.push({ text: t, mode }); push('tool', 'Queued: I\'ll answer this next'); return }
+    push('you', t); turn(t, mode)
+  }
+
+  // conversation mode (driven from the header toggle)
+  useEffect(() => {
+    if (!voiceOn) { conv.current?.stop(); conv.current = null; setVstate('idle'); return }
+    let cancelled = false
+    const handlers = {
       onState: setVstate,
       onInterim: t => setInterim(t),
-      onWake: () => { setOpen(true); setInterim(''); const a = addrRef.current; const line = `Yes${a ? ' ' + a : ''}? What are we working on?`; push('ember', line); voice.current.speak(line) },
-      onUtterance: t => { setInterim(''); setOpen(true); turn(t, 'voice') },
-    })
-    if (voice.current.start()) { setOpen(true); push('ember', 'Conversation mode is on. Say "Hey Ember" any time.') }
-  }
-  useEffect(() => () => voice.current?.stop(), [])
+      onError: m => push('tool', m),
+      onHeard: (text, { woke }) => {
+        const following = Date.now() < followUntil.current
+        if (!woke && !following) return // ignore room talk until "Hey Ember"
+        setOpen(true)
+        if (woke && text.split(/\s+/).filter(Boolean).length < 2) {
+          const g = `Yes, ${USER_NAME}? What are we working on?`; push('ember', g); conv.current.speak(g); followUntil.current = Date.now() + FOLLOW_MS; return
+        }
+        followUntil.current = Date.now() + FOLLOW_MS
+        submit(text, 'voice')
+      },
+    }
+    ;(async () => {
+      const c = createConversation(handlers)
+      conv.current = c
+      const ok = await c.start()
+      if (cancelled) return c.stop()
+      if (ok) { setOpen(true); push('ember', `Conversation mode on. Say "Hey Ember" whenever you need me, ${USER_NAME}.`); return }
+      if (voiceSupported()) { // fallback: browser speech recognition + synthesis
+        const old = createVoice({ onState: setVstate, onInterim: t => setInterim(t), onWake: () => handlers.onHeard('', { woke: true }), onUtterance: t => { setInterim(null); submit(t, 'voice') } })
+        conv.current = old; old.start(); setOpen(true); push('tool', 'Using the browser voice (lower quality) until ElevenLabs is configured.')
+      } else { setVoiceOn(false) }
+    })()
+    return () => { cancelled = true; conv.current?.stop() }
+  }, [voiceOn])
 
-  const orbClass = 'orb ' + vstate
   return <>
-    <button className={orbClass} title="EMBER copilot" onClick={() => setOpen(o => !o)} aria-label="Open EMBER copilot"><span /></button>
+    <button className={'orb ' + vstate} title="EMBER copilot" onClick={() => setOpen(o => !o)} aria-label="Open EMBER copilot"><span /></button>
     {open && <aside className="copilot">
       <header>
-        <div><b>EMBER</b> <span className="dim small">copilot · {vstate === 'listening' ? 'listening for "Hey Ember"' : vstate}</span></div>
+        <div><b>EMBER</b> <span className="dim small">{voiceOn ? { listening: 'listening for “Hey Ember”', hearing: 'hearing you…', transcribing: 'transcribing…', speaking: 'speaking (talk to interrupt)', thinking: 'thinking…', denied: 'microphone blocked' }[vstate] || vstate : 'copilot'}</span></div>
         <button className="x" onClick={() => setOpen(false)} aria-label="Close">×</button>
       </header>
       <div className="log">
@@ -102,24 +131,14 @@ export default function Copilot({ executors }) {
           “Where are we flying blind for the rover?” · “Compare BASS and Saffire.”</div>}
         {log.map((m, i) => <div key={i} className={'msg ' + m.who}>{m.who === 'tool' ? '⚙ ' : ''}{m.text}</div>)}
         {interim && <div className="msg you interim">{interim}…</div>}
-        {busy && <div className="msg tool">thinking…</div>}
+        {busy && <div className="msg tool">{stepRef.current}…</div>}
         <div ref={logEnd} />
       </div>
-      <form onSubmit={e => { e.preventDefault(); const t = input; setInput(''); turn(t, voice.current?.enabled ? 'voice' : 'text') }}>
-        <input type="text" value={input} onChange={e => setInput(e.target.value)} placeholder="Type, or switch on conversation mode…" disabled={busy} />
-        <button className="btn primary" disabled={busy || !input.trim()}>Send</button>
+      <form onSubmit={e => { e.preventDefault(); const t = input; setInput(''); submit(t, voiceOn ? 'voice' : 'text') }}>
+        <input type="text" value={input} onChange={e => setInput(e.target.value)} placeholder={voiceOn ? 'Speak, or type here…' : 'Type a question…'} />
+        <button className="btn primary" disabled={!input.trim()}>Send</button>
       </form>
-      <footer>
-        {supported
-          ? <button className={'btn ' + (voice.current?.enabled ? 'on' : '')} onClick={toggleVoice}>{voice.current?.enabled ? '● Conversation mode on' : '🎙 Conversation mode'}</button>
-          : <span className="dim small">Voice needs Chrome or Edge.</span>}
-        <label className="small dim">Call me&nbsp;
-          <select value={address} onChange={e => { setAddress(e.target.value); writePref('ember-address', e.target.value) }}>
-            <option value="">(nothing)</option><option>sir</option><option>ma'am</option><option>boss</option><option>doctor</option>
-          </select></label>
-        {vstate === 'denied' && <span className="alert small">Microphone blocked: allow it in the address bar.</span>}
-      </footer>
-      <div className="dim small" style={{ padding: '0 12px 10px' }}>Replies by Google Gemini (SI) using EMBER's tools on NASA PSI data. Voice uses your browser's speech service.</div>
+      <div className="dim small" style={{ padding: '0 14px 10px' }}>Replies by Google Gemini (SI) using EMBER's tools on NASA PSI data · voice by ElevenLabs (SI).</div>
     </aside>}
   </>
 }

@@ -7,7 +7,7 @@ function apiDev() {
   return {
     name: 'ember-api-dev',
     configureServer(server) {
-      for (const name of ['ask', 'agent']) server.middlewares.use('/api/' + name, async (req, res) => {
+      for (const name of ['ask', 'agent', 'voice']) server.middlewares.use('/api/' + name, async (req, res) => {
         const cwd = process.cwd()
         process.chdir(path.resolve(__dirname, '..'))
         try {

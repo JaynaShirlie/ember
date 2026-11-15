@@ -1,6 +1,6 @@
 {
- "harvestedAt": "2026-11-15T00:08:02Z",
- "builtAt": "2026-11-15T00:08:08Z",
+ "harvestedAt": "2026-11-14T06:57:21Z",
+ "builtAt": "2026-11-15T05:26:05Z",
  "investigations": 24,
  "tables": 22,
  "testRecords": 2014,
@@ -11,5 +11,21 @@
   "r2": 0.57,
   "mae": 0.0574,
   "coverage95": 0.946
+ },
+ "classifiersCV": {
+  "ignition": {
+   "folds": 5,
+   "auc": 0.74,
+   "accuracy": 0.672,
+   "brier": 0.208,
+   "n": 177
+  },
+  "extinction": {
+   "folds": 5,
+   "auc": 0.816,
+   "accuracy": 0.728,
+   "brier": 0.172,
+   "n": 206
+  }
  }
 }

@@ -141,7 +141,7 @@ def a_cfig():
                 fuelClass="gas", config="spherical " + ("inverse" if inverse else "normal"),
                 o2Pct=o2 * 100 if o2 is not None else None, o2Basis="oxidizer-stream" if inverse else "measured",
                 pressurePsi=p * BAR_PSI if p else None, pressureBasis="measured",
-                out={"coolFlame": r.get(col(df, "cool flame") or col(df, "tfp")), "hotIgnition": r[col(df, "hot ignition")],
+                out={"coolFlame": r.get(col(df, "cool flame") or col(df, "tfp")), "hotIgnition": r[col(df, "hot ignition")], "xf": num(r[col(df, "xf")] if col(df, "xf") else None), "mHC": num(r[col(df, "mhc")] if col(df, "mhc") else (r[col(df, "hc burnrate")] if col(df, "hc burnrate") else None)),
                      "burn_s": num(r[col(df, "burn time")]), "Tad_K": num(r[col(df, "tad")])})
 
 
@@ -297,6 +297,57 @@ def investigations():
 
 
 # ---------------------------------------------------------------- FLEX Gaussian-process model (exported to run in-browser)
+def classifiers():
+    """Interpretable logistic-regression classifiers with stratified 5-fold CV, exported for in-browser use."""
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.model_selection import StratifiedKFold
+    from sklearn.metrics import roc_auc_score, accuracy_score, brier_score_loss
+
+    def fit(name, target, X, y, feats, desc, extra):
+        X = np.array(X, float); y = np.array(y, int)
+        mu, sd = X.mean(0), X.std(0); sd[sd == 0] = 1
+        Z = (X - mu) / sd
+        prob = np.zeros(len(y))
+        for tr, te in StratifiedKFold(5, shuffle=True, random_state=0).split(Z, y):
+            m = LogisticRegression(C=1.0, max_iter=2000, class_weight="balanced").fit(Z[tr], y[tr])
+            prob[te] = m.predict_proba(Z[te])[:, 1]
+        m = LogisticRegression(C=1.0, max_iter=2000, class_weight="balanced").fit(Z, y)
+        return {"name": name, "target": target, "description": desc, "features": feats, "n": int(len(y)), "positives": int(y.sum()),
+                "xMean": mu.tolist(), "xStd": sd.tolist(), "coef": m.coef_[0].tolist(), "intercept": float(m.intercept_[0]),
+                "trainRanges": {f: [float(X[:, i].min()), float(X[:, i].max())] for i, f in enumerate(feats)},
+                "cv": {"folds": 5, "auc": round(float(roc_auc_score(y, prob)), 3), "accuracy": round(float(accuracy_score(y, prob > 0.5)), 3),
+                       "brier": round(float(brier_score_loss(y, prob)), 3)}, **extra}
+
+    out = {}
+    # 1) Ignition: ACME CFI-G normal spherical flames (PSI-159) -> did a hot flame ignite?
+    CN = {"ethane": 2, "propane": 3, "butane": 4, "pentane": 5}
+    X, y = [], []
+    for t in tests:
+        if t["inv"] != "PSI-159" or not t["table"].endswith("normal") or t.get("o2Pct") is None or t.get("pressurePsi") is None:
+            continue
+        hi = str(t["out"].get("hotIgnition") or "").strip().lower()
+        cn = next((v for k, v in CN.items() if k in str(t["fuel"]).lower()), None)
+        xf = t["out"].get("xf"); mhc = t["out"].get("mHC")
+        if hi not in ("yes", "no") or cn is None or xf is None or not mhc:
+            continue
+        X.append([t["o2Pct"], t["pressurePsi"], xf, cn, math.log(mhc)]); y.append(1 if hi == "yes" else 0)
+    out["ignition"] = fit("CFI-G ignition", "P(hot flame ignites)", X, y, ["o2Pct", "pressurePsi", "fuelFraction", "carbonNumber", "logFuelFlow"],
+                          "Gaseous fuel (ethane/propane/butane) spherical diffusion flames, ACME CFI-G, PSI-159", {"source": "PSI-159"})
+    # 2) Extinction: FLEX droplets (PSI-69) -> flame extinguished before burnout (vs burned to completion)
+    X, y = [], []
+    for t in tests:
+        if t["inv"] != "PSI-69" or t.get("o2Pct") is None or t.get("pressurePsi") is None:
+            continue
+        end, d0 = t["out"].get("end"), t["out"].get("d0_mm")
+        if end not in ("Extinction", "Completion") or not d0:
+            continue
+        X.append([t["o2Pct"], t["pressurePsi"], t.get("co2") or 0, t.get("he") or 0, d0, 1 if "hept" in str(t["fuel"]).lower() else 0])
+        y.append(1 if end == "Extinction" else 0)
+    out["extinction"] = fit("FLEX extinction", "P(flame self-extinguishes before burnout)", X, y, ["o2Pct", "pressurePsi", "co2", "he", "d0_mm", "heptane"],
+                            "Liquid fuel droplets (methanol/heptane) with CO2/He suppressants, FLEX, PSI-69", {"source": "PSI-69"})
+    return out
+
+
 def flex_model():
     from sklearn.gaussian_process import GaussianProcessRegressor
     from sklearn.gaussian_process.kernels import RBF, WhiteKernel, ConstantKernel as C
@@ -358,6 +409,9 @@ def main():
     (OUT / "tests.json").write_text(json.dumps(clean(tests), separators=(",", ":")), encoding="utf-8")
     (OUT / "investigations.json").write_text(json.dumps(clean(invs), separators=(",", ":"), ensure_ascii=False), encoding="utf-8")
     (OUT / "flex_gp.json").write_text(json.dumps(model, separators=(",", ":")), encoding="utf-8")
+    clf = classifiers()
+    (OUT / "classifiers.json").write_text(json.dumps(clf, indent=1), encoding="utf-8")
+    meta["classifiersCV"] = {k: v["cv"] | {"n": v["n"]} for k, v in clf.items()}
     (OUT / "meta.json").write_text(json.dumps(meta, indent=1), encoding="utf-8")
     print(json.dumps(meta, indent=1))
 

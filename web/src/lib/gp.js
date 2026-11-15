@@ -40,6 +40,23 @@ export function makeGP(m) {
   return { predict, inRange }
 }
 
+// Prediction + applicability domain: uncertainty grows with GP variance AND distance from tested conditions.
+export const DOMAIN = { o2: 3, psi: 2.5, co2: 0.08, he: 0.08 }
+export function makeAssessor(gp, m, points) {
+  const prior = Math.sqrt(m.constant) * m.yStd
+  return function assess({ o2, psi, co2 = 0, he = 0, fuel = 'Heptane' }) {
+    const pts = (points || m.points).filter(p => p.fuel === fuel)
+    const r = gp.predict([o2 / 100, psi / 14.696, co2, he, fuel === 'Heptane' ? 1 : 0])
+    let d2 = Infinity, nearest = null
+    for (const p of pts) {
+      const a = (o2 - p.o2) / DOMAIN.o2, b = (psi - p.p) / DOMAIN.psi, c = (co2 - p.co2) / DOMAIN.co2, e = (he - p.he) / DOMAIN.he
+      const v = a * a + b * b + c * c + e * e; if (v < d2) { d2 = v; nearest = p }
+    }
+    const support = Math.exp(-0.5 * d2), uGP = Math.min(1, r.std / prior)
+    return { ...r, support, uGP, nearest, u: Math.min(1, Math.sqrt(uGP * uGP + (1 - support) * (1 - support))), inRange: gp.inRange([o2 / 100, psi / 14.696, co2, he, fuel === 'Heptane' ? 1 : 0]) }
+  }
+}
+
 // Rank grid cells by predictive uncertainty: where a new test would teach the model the most.
 export function nextBestExperiments(gp, { fuel, co2, he, o2Range, pRange, steps = 28, top = 3, minSepO2 = 4, minSepP = 2.5 }) {
   const cells = []

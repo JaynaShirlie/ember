@@ -1,0 +1,140 @@
+{
+ "ignition": {
+  "name": "CFI-G ignition",
+  "target": "P(hot flame ignites)",
+  "description": "Gaseous fuel (ethane/propane/butane) spherical diffusion flames, ACME CFI-G, PSI-159",
+  "features": [
+   "o2Pct",
+   "pressurePsi",
+   "fuelFraction",
+   "carbonNumber",
+   "logFuelFlow"
+  ],
+  "n": 177,
+  "positives": 132,
+  "xMean": [
+   32.09890580847459,
+   18.599802849789832,
+   0.3754041807909597,
+   3.2203389830508473,
+   -0.03478701985198929
+  ],
+  "xStd": [
+   8.260361845202217,
+   9.810551172560539,
+   0.3038463250043996,
+   0.7969106297177609,
+   0.6144576773323365
+  ],
+  "coef": [
+   0.6928667478554823,
+   0.13810282921148373,
+   0.1328943443832225,
+   -0.9102041516046783,
+   0.495831759409542
+  ],
+  "intercept": 0.3330345935590876,
+  "trainRanges": {
+   "o2Pct": [
+    17.9685675,
+    39.97
+   ],
+   "pressurePsi": [
+    7.348451600000001,
+    44.0907096
+   ],
+   "fuelFraction": [
+    0.01827,
+    1.0
+   ],
+   "carbonNumber": [
+    2.0,
+    4.0
+   ],
+   "logFuelFlow": [
+    -2.3025850929940455,
+    1.1678273576895826
+   ]
+  },
+  "cv": {
+   "folds": 5,
+   "auc": 0.74,
+   "accuracy": 0.672,
+   "brier": 0.208
+  },
+  "source": "PSI-159"
+ },
+ "extinction": {
+  "name": "FLEX extinction",
+  "target": "P(flame self-extinguishes before burnout)",
+  "description": "Liquid fuel droplets (methanol/heptane) with CO2/He suppressants, FLEX, PSI-69",
+  "features": [
+   "o2Pct",
+   "pressurePsi",
+   "co2",
+   "he",
+   "d0_mm",
+   "heptane"
+  ],
+  "n": 206,
+  "positives": 179,
+  "xMean": [
+   18.75728155339806,
+   14.069230396893209,
+   0.1313106796116504,
+   0.058495145631067946,
+   3.0121359223300965,
+   0.36893203883495146
+  ],
+  "xStd": [
+   3.7050634977918326,
+   5.35280776711551,
+   0.18234377695096146,
+   0.12331649814318923,
+   0.7087705072945384,
+   0.482515481156861
+  ],
+  "coef": [
+   -0.9786074818917124,
+   0.6788313147526074,
+   0.2907140816758654,
+   0.46409160899192503,
+   0.6949806379042067,
+   -0.7376202346715122
+  ],
+  "intercept": 0.8381360421172368,
+  "trainRanges": {
+   "o2Pct": [
+    12.0,
+    34.0
+   ],
+   "pressurePsi": [
+    10.17695784,
+    44.85557496
+   ],
+   "co2": [
+    0.0,
+    0.7
+   ],
+   "he": [
+    0.0,
+    0.45
+   ],
+   "d0_mm": [
+    1.1,
+    4.67
+   ],
+   "heptane": [
+    0.0,
+    1.0
+   ]
+  },
+  "cv": {
+   "folds": 5,
+   "auc": 0.816,
+   "accuracy": 0.728,
+   "brier": 0.172
+  },
+  "source": "PSI-69"
+ }
+}

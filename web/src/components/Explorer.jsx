@@ -1,9 +1,12 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Html, Edges, Line } from '@react-three/drei'
 import * as THREE from 'three'
 import { HABITAT_SCENES, hostOf, apparatusOf, cm, widthFromName } from '../lib/scenes.js'
 import { FlameShell } from '../lib/flame.jsx'
+import { zoneStats } from '../lib/score.js'
+import { HABITATS } from '../lib/habitats.js'
+import { askCopilot } from './Copilot.jsx'
 
 // Stark-Expo-style holographic explorer. Habitats are procedural (approximate public dimensions);
 // experiment apparatus is generated on the spot from the selected PSI test row's recorded values.
@@ -135,7 +138,57 @@ function Apparatus({ kind, inv, row, onPart }) {
   return <Label position={[0, 0, 0]}>This investigation's table has no apparatus geometry to reconstruct.</Label>
 }
 
-export default function Explorer({ data, hab, testsByInv, explorer, setExplorer, whatIf }) {
+// ---------- photoreal machine pages (Machine Skill kit, public/machines/*.html), driven over a same-origin bridge ----------
+const MACHINES = { droplet: '/machines/flex.html', burner: '/machines/acme.html', saffire: '/machines/saffire.html', bass: '/machines/msg.html', coflow: '/machines/msg.html' }
+const HAB_MACHINES = { iss: '/machines/iss.html', moon: '/machines/moon.html', rover: '/machines/rover.html' }
+const ANY_HOST = ['CIR', 'MSG', 'CYGNUS']
+// parts of the ISS page that hosted combustion experiments -> the facility codes used by hostOf()
+const PART_HOSTS = { 'Combustion Integrated Rack': ['CIR'], 'Microgravity Science Glovebox': ['MSG'], 'Destiny laboratory': ['CIR', 'MSG'], 'Saffire flow unit': ['CYGNUS'], 'Cygnus cargo vehicle': ['CYGNUS'], 'Science lab': ANY_HOST, 'Combustion glovebox': ANY_HOST }
+const MODES = ['cut', 'xray', 'labels', 'explode']
+// Double-buffered: a new apparatus page loads hidden under the current one and fades in only once it has
+// drawn frames, so switching experiments never shows an empty (black) page while three.js loads.
+function MachineFrame(props) {
+  const { src, whatIf, onPart, zone } = props
+  const [layers, setLayers] = useState(() => [{ src, id: 0, shown: false }])
+  // the page reads models from window.EMBER (parent); numbers always come from EMBER's what-if engine
+  useEffect(() => { window.EMBER = { whatIf, onPart, zone, onReady: () => {} }; return () => { delete window.EMBER } }, [whatIf, onPart, zone])
+  useEffect(() => { setLayers(L => L[L.length - 1].src === src ? L : [...L, { src, id: L[L.length - 1].id + 1, shown: false }]) }, [src])
+  const onShown = useCallback(id => setLayers(L => L.filter(l => l.id >= id).map(l => l.id === id ? { ...l, shown: true } : l)), [])
+  const top = layers[layers.length - 1]
+  return <div style={{ position: 'absolute', inset: 0, background: '#0d0e10', borderRadius: 'inherit', overflow: 'hidden' }}>
+    {!layers.some(l => l.shown) && <div className="small" style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', color: '#8e8c86' }}>Loading 3D…</div>}
+    {layers.map(l => <MachineLayer key={l.id} {...props} src={l.src} id={l.id} live={l.id === top.id} onShown={onShown} />)}
+  </div>
+}
+
+function MachineLayer({ src, id, live, onShown, row, hab, show, applyKey, follow }) {
+  const ref = useRef(null), [ready, setReady] = useState(false), [shown, setShown] = useState(false)
+  const m = () => { try { return ref.current?.contentWindow?.EMBER_MACHINE } catch { return null } }
+  const onLoad = () => {
+    const t0 = performance.now()
+    const poll = () => {
+      let w = null; try { w = ref.current?.contentWindow } catch { /* gone */ }
+      if (!w) return
+      const lab = w.__lab
+      // reveal after the page has rendered a few frames (or after 4 s as a fallback)
+      if (w.EMBER_MACHINE && lab && (lab.time > 0.25 || performance.now() - t0 > 4000)) { setReady(true); return }
+      setTimeout(poll, 80)
+    }
+    poll()
+  }
+  useEffect(() => { if (live && ready && row) m()?.setRow(row) }, [live, ready, row])
+  // fade in a moment after the row is applied, so the old model stays up until the new one is built
+  useEffect(() => { if (!ready || shown) return; const t = setTimeout(() => { setShown(true); onShown(id) }, 300); return () => clearTimeout(t) }, [ready, shown])
+  useEffect(() => { if (live && ready && applyKey) m()?.setScenario({ o2: hab.o2, psi: hab.psi, name: hab.name }) }, [live, ready, applyKey])
+  // habitat pages follow the scenario row: the cabin air is the scenario
+  useEffect(() => { if (live && ready && follow) m()?.setScenario({ o2: Math.min(hab.o2, 50), psi: hab.psi, g: hab.g, name: hab.name }) }, [live, ready, follow, hab.o2, hab.psi, hab.g, hab.name])
+  useEffect(() => { const x = m(); if (!live || !ready || !x) return; for (const k of MODES) x.mode(k, show.includes(k)); x.mode('break', show.includes('break')) }, [live, ready, show.join(',')])
+  return <iframe ref={ref} title="3D machine" src={src + '?embed=1&v=' + __BUILD__} onLoad={onLoad}
+    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0, borderRadius: 'inherit', background: '#0d0e10',
+      opacity: shown ? 1 : 0, transition: 'opacity .35s ease', pointerEvents: live && shown ? 'auto' : 'none', zIndex: id }} />
+}
+
+export default function Explorer({ data, hab, setHab, testsByInv, explorer, setExplorer, whatIf }) {
   const scene = HABITAT_SCENES[explorer.target] || HABITAT_SCENES.iss
   const invs = useMemo(() => data.invs.filter(i => (testsByInv[i.accession] || []).length && hostOf(i)), [data, testsByInv])
   const inv = data.invs.find(i => i.accession === explorer.experiment) || null
@@ -149,13 +202,22 @@ export default function Explorer({ data, hab, testsByInv, explorer, setExplorer,
   const host = inv ? hostOf(inv) : null
   const view = explorer.experiment && explorer.focus === 'apparatus' ? 'apparatus' : 'habitat'
   const set = patch => setExplorer(e => ({ ...e, ...patch }))
-  const run = () => setResult(whatIf({ scenario: hab, investigation: inv.accession, fuel: row?.fuel, co2: row?.co2 || 0, he: row?.he || 0, d0: row?.out?.d0_mm }))
+  const [applyKey, setApplyKey] = useState(0)
+  useEffect(() => { if (explorer.show?.includes('apply_scenario')) setApplyKey(k => k + 1) }, [explorer.show])
+  const kind = inv ? apparatusOf(inv, rows) : null
+  const machineSrc = view === 'apparatus' ? MACHINES[kind] : HAB_MACHINES[explorer.target] || null
+  const habShow = view === 'habitat' ? [...(explorer.show || []), ...(explorer.explode ? ['explode'] : []), ...(host ? ['xray', 'labels'] : [])] : (explorer.show || [])
+  const solidMax = useMemo(() => Math.max(...data.tests.filter(t => t.fuelClass === 'solid' && t.o2Pct).map(t => t.o2Pct)), [data])
+  const zone = useCallback(h => { const z = zoneStats(data.tests, h); return { total: z.total, solid: z.by.solid, solidMax } }, [data, solidMax])
+  const onPart = useCallback(p => setInfo({ id: p.name, title: p.name, text: p.text }), [])
+  const run = () => setApplyKey(k => k + 1) || setResult(whatIf({ scenario: hab, investigation: inv.accession, fuel: row?.fuel, co2: row?.co2 || 0, he: row?.he || 0, d0: row?.out?.d0_mm }))
 
   return (
     <div className="grid-main explorer">
       <div className="canvas3d holo">
-        <div className="overlay">{view === 'habitat' ? `${scene.name} · approximate scale · click any module · ${explorer.explode ? 'exploded view' : 'assembled'}` : `${inv.acronym || inv.accession} apparatus · generated from PSI test row ${rowIdx + 1}/${rows.length} · click any part`}</div>
-        <div className="overlay" style={{ top: 'auto', bottom: 10 }}>Scenario: {hab.name} · {hab.o2}% O₂ · {hab.psi} psi · {hab.g.toFixed(2)} g</div>
+        {!machineSrc && <div className="overlay">{view === 'habitat' ? `${scene.name} · approximate scale · click any module · ${explorer.explode ? 'exploded view' : 'assembled'}` : `${inv.acronym || inv.accession} apparatus · generated from PSI test row ${rowIdx + 1}/${rows.length} · click any part`}</div>}
+        {!machineSrc && <div className="overlay" style={{ top: 'auto', bottom: 10 }}>Scenario: {hab.name} · {hab.o2}% O₂ · {hab.psi} psi · {hab.g.toFixed(2)} g</div>}
+        {machineSrc ? <MachineFrame src={machineSrc} row={view === 'apparatus' ? row : null} hab={hab} whatIf={whatIf} zone={zone} follow={view === 'habitat'} show={habShow} applyKey={applyKey} onPart={onPart} /> :
         <Canvas camera={{ position: view === 'habitat' ? (explorer.target === 'iss' ? [16, 10, 18] : [11, 8, 13]) : [4.5, 3, 6], fov: 42 }} onPointerMissed={() => setInfo(null)} key={view + explorer.target}>
           <color attach="background" args={['#02040a']} />
           <ambientLight intensity={0.7} /><directionalLight position={[5, 10, 5]} intensity={0.8} />
@@ -164,18 +226,18 @@ export default function Explorer({ data, hab, testsByInv, explorer, setExplorer,
             ? <Habitat scene={scene} explode={explorer.explode} selected={info?.id} host={host} onPick={id => { const p = scene.parts.find(p => p.id === id); setInfo({ id, title: p.name, text: p.info }) }} />
             : <Apparatus kind={apparatusOf(inv, rows)} inv={inv} row={row} onPart={p => setInfo({ id: p.id, title: p.id, text: p.text })} />}
           <OrbitControls enableDamping makeDefault autoRotate={!info} autoRotateSpeed={0.4} />
-        </Canvas>
+        </Canvas>}
       </div>
 
       <div className="side">
         <div className="panel">
-          <h2>Explore</h2>
+          <h2>Habitat</h2>
           <div className="chips">
             {[['iss', 'ISS'], ['moon', 'Moon base'], ['rover', 'Rover']].map(([id, n]) =>
-              <button key={id} className={'chip' + (explorer.target === id && view === 'habitat' ? ' on' : '')} onClick={() => set({ target: id, focus: 'habitat' })}>{n}</button>)}
+              <button key={id} className={'chip' + (explorer.target === id && view === 'habitat' ? ' on' : '')} onClick={() => { set({ target: id, focus: 'habitat' }); const p = HABITATS.find(h => h.id === id); if (p && setHab) setHab({ ...p }) }}>{n}</button>)}
             <button className={'chip' + (explorer.explode ? ' on' : '')} onClick={() => set({ explode: !explorer.explode, focus: 'habitat' })}>{explorer.explode ? 'Assemble' : 'Explode'}</button>
           </div>
-          <div className="dim small" style={{ marginTop: 6 }}>{scene.atmosphereNote}</div>
+          <div className="dim small" style={{ marginTop: 10 }}>{machineSrc && view === 'habitat' ? 'The cabin air follows the scenario. Click a module to see what ran there.' : scene.atmosphereNote}</div>
         </div>
 
         <div className="panel">
@@ -193,23 +255,34 @@ export default function Explorer({ data, hab, testsByInv, explorer, setExplorer,
               <select value={rowIdx} onChange={e => setRowIdx(+e.target.value)} style={{ width: '100%', marginTop: 4 }}>
                 {rows.slice(0, 400).map((r, i) => <option key={r.id} value={i}>{i + 1}. {String(r.fuel).slice(0, 28)} · {r.o2Pct != null ? r.o2Pct.toFixed(1) + '% O₂' : 'O₂ n/a'}{r.pressurePsi ? ' · ' + r.pressurePsi.toFixed(1) + ' psi' : ''}{r.flowCmS ? ' · ' + r.flowCmS + ' cm/s' : ''}</option>)}
               </select></label>
-            <button className="btn primary" style={{ marginTop: 10, width: '100%' }} onClick={run}>Apply to {hab.name} ({hab.o2}% O₂, {hab.psi} psi)</button>
+            <button className="btn primary" style={{ marginTop: 12, width: '100%' }} onClick={run}>Apply {hab.name} air</button>
           </>}
         </div>
 
+        <div className="panel">
+          <h2>Or tell the copilot</h2>
+          <div className="small muted">It renders these models in real time from what you ask, typed or spoken.</div>
+          <div className="chips" style={{ marginTop: 10 }}>
+            {['Pull up the rover and take it apart.', 'Show the Moon base in x-ray with labels.'].map(t => <button key={t} className="chip small" onClick={() => askCopilot(t)}>{t}</button>)}
+          </div>
+        </div>
+
         {result && <div className="panel">
-          <h2>What happens at {result.scenario.o2}% O₂, {result.scenario.psi} psi</h2>
+          <h2>At {result.scenario.o2}% O₂, {result.scenario.psi} psi</h2>
           {result.models.map((m, i) => <div key={i} className="small" style={{ marginBottom: 6 }}>
             {m.value == null ? <span className="warn">{m.output}</span>
               : <><b className="score">{m.units ? `${m.value} ± ${m.plusMinus95} ${m.units}` : `${Math.round(m.value * 100)}%`}</b> {m.output}<div className="dim">{m.model} · CV {m.validation?.auc ? `AUC ${m.validation.auc}` : `R² ${m.validation?.r2}`}</div></>}
           </div>)}
           {result.nearestRealTests?.[0] && <div className="small muted">Nearest real test: {result.nearestRealTests[0].fuel} at {result.nearestRealTests[0].o2Pct}% O₂, {result.nearestRealTests[0].psi} psi ({result.nearestRealTests[0].basis}).</div>}
-          {result.flags.map((f, i) => <div key={i} className="small warn" style={{ marginTop: 4 }}>⚠ {f}</div>)}
+          {result.flags.map((f, i) => <div key={i} className="small warn" style={{ marginTop: 6 }}>{f}</div>)}
         </div>}
 
         {info && <div className="panel">
           <h2 style={{ textTransform: 'capitalize' }}>{info.title}</h2>
           <div className="small muted">{info.text}</div>
+          {PART_HOSTS[info.title] && <div className="chips" style={{ marginTop: 12 }}>
+            {invs.filter(i => PART_HOSTS[info.title].includes(hostOf(i))).map(i => <button key={i.accession} className="chip" onClick={() => set({ experiment: i.accession, focus: 'apparatus' })}>{i.acronym || i.accession}</button>)}
+          </div>}
         </div>}
       </div>
     </div>

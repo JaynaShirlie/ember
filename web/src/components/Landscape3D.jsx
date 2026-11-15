@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Html, Line } from '@react-three/drei'
 import * as THREE from 'three'
 import { makeGP } from '../lib/gp.js'
+import Workbench from './Workbench.jsx'
 
 // Axes: X = oxygen %, Z = pressure psi, Y = predicted burning-rate constant K (mm²/s)
 // Uncertainty shown as fog combines (a) the Gaussian-process variance and (b) distance from conditions that
@@ -93,8 +94,8 @@ function TestedFootprint({ pts }) { // tested (O2, psi) cells drawn on the floor
 }
 
 export default function Landscape({ data, hab }) {
-  const gp = useMemo(() => makeGP(data.gp), [data])
-  const m = data.gp
+  const [m, setM] = useState(data.gp)
+  const gp = useMemo(() => makeGP(m), [m])
   const [fuel, setFuel] = useState('Heptane')
   const [co2, setCo2] = useState(0)
   const [he, setHe] = useState(0)
@@ -155,7 +156,8 @@ export default function Landscape({ data, hab }) {
           <Axes />
           <TestedFootprint pts={fuelPts} />
           <gridHelper args={[10, 10, '#1b2540', '#111827']} />
-          {fuelPts.map((p, i) => (
+          {fuelPts.filter(p => p.user).map((p, i) => <mesh key={'u' + i} position={[sx(Math.min(40, p.o2)), sy(p.K), sz(Math.min(30, p.p))]}><octahedronGeometry args={[0.16]} /><meshBasicMaterial color="#F2A541" /></mesh>)}
+          {fuelPts.filter(p => !p.user).map((p, i) => (
             <mesh key={i} position={[sx(Math.min(40, p.o2)), sy(p.K), sz(Math.min(30, p.p))]}>
               <sphereGeometry args={[near(p) ? 0.1 : 0.055, 14, 14]} />
               <meshBasicMaterial color={END_COLOR[p.end] || '#ffffff'} transparent opacity={near(p) ? 1 : 0.22} />
@@ -176,9 +178,10 @@ export default function Landscape({ data, hab }) {
         </Canvas>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+      <div className="side">
+        <Workbench base={data.gp} model={m} setModel={setM} clf={data.clf} hab={hab} />
         <div className="panel">
-          <h2>Model inputs</h2>
+          <h2>Surface controls</h2>
           <div className="small muted" style={{ marginBottom: 8 }}>Droplet-flame burning rate learned from NASA FLEX (PSI-69). Move the sliders: the surface, fog and recommendations are recomputed live in your browser.</div>
           <label className="small">Fuel&nbsp;<select value={fuel} onChange={e => setFuel(e.target.value)}><option>Heptane</option><option>Methanol</option></select></label>
           <label className="slider" style={{ marginTop: 8 }}><span>CO₂ suppressant <b>{(co2 * 100).toFixed(0)}%</b> <span className="dim">(tested {m.trainRanges.co2.map(v => (v * 100).toFixed(0)).join('–')}%)</span></span>

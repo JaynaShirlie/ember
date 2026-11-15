@@ -6,6 +6,10 @@ const W = 820, H = 520, M = { l: 56, r: 18, t: 18, b: 46 }
 
 export default function GapMap({ data, hab, onPick }) {
   const [showAssumed, setShowAssumed] = useState(true)
+  const [classes, setClasses] = useState({ solid: true, liquid: true, gas: true })
+  const [onlyInv, setOnlyInv] = useState('')
+  const [plan, setPlan] = useState([])            // planned campaign: { cls, o2, psi, n }
+  const [draft, setDraft] = useState({ cls: 'solid', o2: '', psi: '', n: 3 })
   const [showInverse, setShowInverse] = useState(false)
   const [hover, setHover] = useState(null)
   const [tol, setTol] = useState({ o2: 4, psi: 2 })
@@ -20,7 +24,7 @@ export default function GapMap({ data, hab, onPick }) {
   const pts = useMemo(() => {
     const m = new Map()
     for (const t of data.tests) {
-      if (t.matrix || t.o2Pct == null || t.pressurePsi == null) continue
+      if (t.matrix || t.o2Pct == null || t.pressurePsi == null || !classes[t.fuelClass] || (onlyInv && t.inv !== onlyInv)) continue
       if (t.o2Basis === 'oxidizer-stream' && !showInverse) continue
       const assumed = t.o2Basis === 'assumed-cabin' || t.pressureBasis === 'assumed-cabin'
       if (assumed && !showAssumed) continue
@@ -29,7 +33,7 @@ export default function GapMap({ data, hab, onPick }) {
       p.n += t.count || 1; m.set(key, p)
     }
     return [...m.values()]
-  }, [data, showAssumed, showInverse])
+  }, [data, showAssumed, showInverse, classes, onlyInv])
 
   const yMax = showInverse ? 90 : 45, xMax = 46
   const x = v => M.l + (Math.min(v, xMax) / xMax) * (W - M.l - M.r)
@@ -69,6 +73,8 @@ export default function GapMap({ data, hab, onPick }) {
               style={{ cursor: 'pointer' }} onMouseEnter={() => setHover(p)} onMouseLeave={() => setHover(null)} onClick={() => onPick(p.inv)} />
           })}
           <circle cx={x(hab.psi)} cy={y(hab.o2)} r="6" fill="#fff" stroke="#F2A541" strokeWidth="2" />
+          {plan.map((p, i) => <g key={'pl' + i} transform={`translate(${x(p.psi)},${y(p.o2)}) rotate(45)`}>
+            <rect x={-7 - p.n} y={-7 - p.n} width={14 + 2 * p.n} height={14 + 2 * p.n} fill="none" stroke="#5fd39a" strokeWidth="2.5" strokeDasharray="4 2" /></g>)}
           {hover && <g>
             <rect x={Math.min(x(hover.psi) + 12, W - 230)} y={Math.max(y(hover.o2) - 46, 4)} width="220" height="42" rx="6" fill="#0e162a" stroke="#3a4e78" />
             <text x={Math.min(x(hover.psi) + 22, W - 220)} y={Math.max(y(hover.o2) - 28, 22)} fill="#fff" fontSize="12">{acr[hover.inv]} · {hover.cls} · {hover.n} test{hover.n > 1 ? 's' : ''}</text>
@@ -78,7 +84,16 @@ export default function GapMap({ data, hab, onPick }) {
         <div className="dim small">Click a point to open that investigation. Point size = number of tests. Computed live from {data.meta.testRecords.toLocaleString()} harvested test records.</div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+      <div className="side">
+        <div className="panel">
+          <h2>Filter the evidence</h2>
+          <div className="chips">{['solid', 'liquid', 'gas'].map(c => <button key={c} className={'chip' + (classes[c] ? ' on' : '')} onClick={() => setClasses(s => ({ ...s, [c]: !s[c] }))}>{FUEL_LABEL[c]}</button>)}</div>
+          <select value={onlyInv} onChange={e => setOnlyInv(e.target.value)} style={{ width: '100%', marginTop: 8 }}>
+            <option value="">All investigations</option>
+            {data.invs.filter(i => data.tests.some(t => t.inv === i.accession && t.o2Pct != null && t.pressurePsi != null)).map(i => <option key={i.accession} value={i.accession}>{i.acronym || i.accession}</option>)}
+          </select>
+        </div>
+        <CampaignPlanner hab={hab} plan={plan} setPlan={setPlan} draft={draft} setDraft={setDraft} zone={zone} tol={tol} />
         <div className="panel">
           <h2>Inside the {hab.name} zone</h2>
           <div className="dim small">Zone = ±{tol.o2} points O₂, ±{tol.psi} psi around {hab.o2}% / {hab.psi} psi · ambient O₂ only</div>
@@ -107,4 +122,34 @@ export default function GapMap({ data, hab, onPick }) {
       </div>
     </div>
   )
+}
+
+// Plan a test campaign and see how much of the habitat gap it would close.
+function CampaignPlanner({ hab, plan, setPlan, draft, setDraft, zone, tol }) {
+  const inZone = p => Math.abs(p.o2 - hab.o2) <= tol.o2 && Math.abs(p.psi - hab.psi) <= tol.psi
+  const added = { solid: 0, liquid: 0, gas: 0 }; plan.filter(inZone).forEach(p => (added[p.cls] += p.n))
+  const missing = ['solid', 'liquid', 'gas'].filter(c => zone.by[c] === 0)
+  const closed = missing.filter(c => added[c] > 0)
+  const total = plan.reduce((a, p) => a + p.n, 0), outside = plan.filter(p => !inZone(p)).reduce((a, p) => a + p.n, 0)
+  const ok = +draft.o2 > 0 && +draft.psi > 0 && +draft.n > 0
+  return <div className="panel">
+    <h2>Plan a test campaign</h2>
+    <div className="small muted">Add planned tests (green diamonds) and see what they would add inside the {hab.name} zone.</div>
+    <div className="formgrid" style={{ marginTop: 8, gridTemplateColumns: 'repeat(4, minmax(0,1fr))' }}>
+      <label>Fuel<select value={draft.cls} onChange={e => setDraft({ ...draft, cls: e.target.value })}><option value="solid">solid</option><option value="liquid">liquid</option><option value="gas">gas</option></select></label>
+      <label>O₂ %<input type="number" value={draft.o2} onChange={e => setDraft({ ...draft, o2: e.target.value })} placeholder={hab.o2} /></label>
+      <label>psi<input type="number" value={draft.psi} onChange={e => setDraft({ ...draft, psi: e.target.value })} placeholder={hab.psi} /></label>
+      <label>tests<input type="number" min="1" value={draft.n} onChange={e => setDraft({ ...draft, n: e.target.value })} /></label>
+    </div>
+    <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
+      <button className="btn primary" disabled={!ok} onClick={() => setPlan(p => [...p, { cls: draft.cls, o2: +draft.o2, psi: +draft.psi, n: Math.min(20, +draft.n) }])}>Add to plan</button>
+      <button className="btn" onClick={() => setPlan(p => [...p, { cls: 'solid', o2: hab.o2, psi: hab.psi, n: 4 }])}>+ 4 solid tests at {hab.name}</button>
+      {plan.length > 0 && <button className="btn" onClick={() => setPlan([])}>Clear</button>}
+    </div>
+    {plan.length > 0 && <div className="small" style={{ marginTop: 10 }}>
+      <div><b>{total}</b> planned tests · <b>{total - outside}</b> inside the zone{outside ? <span className="warn"> · {outside} fall outside it</span> : ''}</div>
+      <div style={{ marginTop: 4 }}>Zone after campaign: solid {zone.by.solid} → <b>{zone.by.solid + added.solid}</b> · liquid {zone.by.liquid} → <b>{zone.by.liquid + added.liquid}</b> · gas {zone.by.gas} → <b>{zone.by.gas + added.gas}</b></div>
+      <div className={closed.length ? 'good' : 'warn'} style={{ marginTop: 4 }}>{missing.length === 0 ? 'Every fuel class already has evidence here; extra tests tighten it.' : closed.length === missing.length ? `Closes every empty evidence class (${closed.join(', ')}).` : closed.length ? `Closes ${closed.join(', ')}; still missing: ${missing.filter(c => !closed.includes(c)).join(', ')}.` : `Does not reach the empty classes (${missing.join(', ')}). Move tests into the zone.`}</div>
+    </div>}
+  </div>
 }

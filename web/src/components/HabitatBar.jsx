@@ -5,7 +5,7 @@ export default function HabitatBar({ hab, setHab }) {
   return (
     <div className="habitat">
       <div>
-        <div className="label">HABITAT</div>
+        <div className="label">SCENARIO <span className="dim" style={{ fontWeight: 400, letterSpacing: 0, textTransform: "none" }}>· drives Atlas ranking, gap zone, landscape marker, what-if and the copilot. Gravity flags extrapolation (PSI has no partial-g data).</span></div>
         <div className="chips" style={{ marginTop: 6 }}>
           {HABITATS.map(h => (
             <button key={h.id} className={'chip' + (hab.id === h.id ? ' on' : '')} onClick={() => setHab({ ...h })} title={h.note}>

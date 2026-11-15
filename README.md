@@ -7,7 +7,7 @@ EMBER turns NASA's microgravity combustion data (Physical Sciences Informatics, 
 
 **The finding:** of 1,735 NASA test conditions with oxygen and pressure, not one solid material (fabric or plastic) was burned above 22.2% O₂. Moon-base planning air is 34% O₂ at 8.2 psi.
 
-![The Brief: five evidence checks for the Moon base](docs/screenshots/01-brief.png)
+![EMBER Copilot renders FLEX live on request](docs/screenshots/06-copilot-renders-flex.png)
 
 ## Why NASA's data needs a decision layer
 PSI is an archive of experiments that each answered their own science question: 38 different outcome fields across 22 tables, no solid-material tests at habitat oxygen levels, and no tests in partial gravity. A bigger model cannot fix missing measurements. EMBER instead keeps a ledger of what is known, how well, and plans the next tests so each costly flight teaches the most.
@@ -26,9 +26,9 @@ PSI is an archive of experiments that each answered their own science question: 
 
 | | |
 |---|---|
-| ![Copilot call-out](docs/screenshots/02-copilot-callout.png) | ![Evidence ranking](docs/screenshots/03-evidence.png) |
-| ![Gap map](docs/screenshots/04-gaps.png) | ![3D flammability model](docs/screenshots/05-model.png) |
-| ![ISS in 3D](docs/screenshots/06-iss.png) | ![Moon base in 3D](docs/screenshots/07-moon-base.png) |
+| ![Brief and copilot](docs/screenshots/01-brief-copilot.png) | ![Evidence ranking](docs/screenshots/02-evidence.png) |
+| ![Gap map](docs/screenshots/03-gaps.png) | ![3D flammability model](docs/screenshots/04-model.png) |
+| ![FLEX apparatus in x-ray with labels](docs/screenshots/05-flex-xray-labels.png) | ![Ask the evidence](docs/screenshots/07-ask.png) |
 
 ## Machine learning (trained on NASA data, cross-validated)
 | Model | Data | Result (5-fold CV) |

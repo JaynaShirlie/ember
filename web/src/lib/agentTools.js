@@ -2,6 +2,8 @@
 // SI disclosure: written with assistance from Claude (Anthropic).
 import { HABITATS } from './habitats.js'
 import { rankInvestigations, zoneStats } from './score.js'
+import { readiness, WORD } from './readiness.js'
+import { planCampaign, campaignTargets, groupPicks } from './campaign.js'
 
 export function makeExecutors(ctx) {
   // ctx: { data, testsByInv, search, assess, whatIf, getHab, setHab, setTab, setCompare, setExplorer, setFocusInv }
@@ -20,15 +22,17 @@ export function makeExecutors(ctx) {
       return { scenario: { name: h.name, o2: h.o2, psi: h.psi, g: h.g } }
     },
     navigate({ view }) { ctx.setTab(view); return { opened: view } },
-    explore_3d({ target, module, explode, experiment }) {
-      ctx.setExplorer(e => ({ ...e, target: target === 'experiment' ? e.target : target, module: module || null, explode: explode ?? e.explode, experiment: experiment ? norm(experiment) : e.experiment, focus: experiment || target === 'experiment' ? 'apparatus' : 'habitat' }))
+    explore_3d({ target, module, explode, experiment, show }) {
+      ctx.setExplorer(e => ({ ...e, target: target === 'experiment' ? e.target : target, module: module || null, explode: explode ?? e.explode, experiment: experiment ? norm(experiment) : e.experiment, focus: experiment || target === 'experiment' ? 'apparatus' : 'habitat', show: show ?? e.show ?? [] }))
       ctx.setTab('explorer')
-      return { opened: '3D explorer', target, module: module || null, experiment: experiment ? norm(experiment) : null }
+      return { opened: '3D explorer', target, module: module || null, experiment: experiment ? norm(experiment) : null, show: show || [] }
     },
     what_if(a) {
       const h = ctx.getHab()
       const scenario = { name: h.name, o2: a.o2 ?? h.o2, psi: a.psi ?? h.psi, g: a.g ?? h.g }
-      return ctx.whatIf({ scenario, investigation: norm(a.investigation), fuel: a.fuel, co2: a.co2 || 0, he: a.he || 0, d0: a.d0_mm })
+      // with no fuel given, use the test row the 3D explorer shows first, so the reply and the model on screen agree
+      const id = norm(a.investigation), row = (ctx.testsByInv[id] || []).find(t => !t.matrix)
+      return ctx.whatIf({ scenario, investigation: id, fuel: a.fuel || row?.fuel, co2: a.co2 ?? row?.co2 ?? 0, he: a.he ?? row?.he ?? 0, d0: a.d0_mm ?? row?.out?.d0_mm })
     },
     search_psi({ query }) {
       return { results: ctx.search(query, 5).map(r => { const i = byId[r.id]; return { ...brief(i), excerpt: (i.objective || '').slice(0, 400), impacts: (i.impacts || '').slice(0, 300) } }) }
@@ -49,7 +53,20 @@ export function makeExecutors(ctx) {
     rank_for_scenario({ top = 5 } = {}) {
       return { ranked: rankInvestigations(ctx.data.invs, ctx.testsByInv, ctx.getHab()).slice(0, top).map(r => ({ id: r.inv.accession, acronym: r.inv.acronym, score: +r.score.toFixed(1), closeness: +r.parts.closeness.toFixed(2) })) }
     },
-    next_best_experiments({ fuel = 'Heptane', co2 = 0, he = 0 } = {}) {
+    readiness() {
+      const h = ctx.getHab(), r = readiness({ data: ctx.data, hab: h, assess: ctx.assess })
+      ctx.setTab('brief')
+      return { scenario: { name: h.name, o2: h.o2, psi: h.psi, g: h.g }, checksMet: `${r.pass} of ${r.checks.length}`, verdict: r.title,
+        checks: r.checks.map(c => ({ check: c.q, status: WORD[c.state], value: c.value, detail: c.note })) }
+    },
+    next_best_experiments({ fuel = 'Heptane', co2 = 0, he = 0, tests = 5 } = {}) {
+      const h = ctx.getHab(), targets = campaignTargets(h), n = Math.max(1, Math.min(12, Math.round(tests) || 5))
+      const p = planCampaign(ctx.data.gp, { targets, fuel, co2, he, n })
+      return { fuel, tests: n, targetAtmospheres: targets.map(t => t.name), mean95BandBefore_mm2s: +p.before.toFixed(3), mean95BandAfter_mm2s: +p.after.toFixed(3),
+        campaign: groupPicks(p.picks).map(g => ({ tests: g.n, o2Pct: g.o2, psi: g.psi, at: g.target || 'between habitats' })),
+        note: 'Exact Gaussian-process design on NASA FLEX droplet data (microgravity, liquid fuel). Solids are not modelled: any solid-material test above the highest O2 in PSI would be the first.' }
+    },
+    _uncertainty_ranking({ fuel = 'Heptane', co2 = 0, he = 0 } = {}) {
       const h = ctx.getHab(), cells = []
       for (let o2 = 14; o2 <= 40; o2 += 1) for (let psi = 4; psi <= 22; psi += 0.75) {
         if (o2 / 100 + co2 + he > 1) continue

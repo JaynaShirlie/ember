@@ -6,29 +6,35 @@ const STR = { type: 'STRING' }, NUM = { type: 'NUMBER' }
 export const TOOLS = [
   { name: 'set_scenario', description: 'Set the habitat atmosphere the whole dashboard analyses. Use a preset and/or explicit values.',
     parameters: { type: 'OBJECT', properties: { preset: { type: 'STRING', enum: ['iss', 'transit', 'moon', 'rover', 'mars', 'suit'] }, o2: { ...NUM, description: 'oxygen %' }, psi: { ...NUM, description: 'pressure psi' }, g: { ...NUM, description: 'gravity in g' } } } },
-  { name: 'navigate', description: 'Open a dashboard view.', parameters: { type: 'OBJECT', properties: { view: { type: 'STRING', enum: ['atlas', 'gap', 'landscape', 'explorer', 'ask'] } }, required: ['view'] } },
+  { name: 'navigate', description: 'Open a dashboard view: brief (evidence readiness for the scenario), atlas (ranked evidence), gap (map of tested conditions), landscape (burning-rate model), explorer (3D hardware), ask.', parameters: { type: 'OBJECT', properties: { view: { type: 'STRING', enum: ['brief', 'atlas', 'gap', 'landscape', 'explorer', 'ask'] } }, required: ['view'] } },
+  { name: 'readiness', description: 'Evidence readiness brief for the current scenario: five checks (tests near this air, solid-material tests, recorded versus assumed conditions, gravity, model support), each Measured, Thin or Missing, plus a verdict. Use for "are we ready", "can we certify", "what do we know about this habitat". Opens the Brief view.' },
   { name: 'explore_3d', description: 'Open the interactive 3D explorer on a habitat (ISS, Moon base, pressurized rover) or an experiment apparatus; optionally focus a module/part, explode the assembly, or install an experiment inside a module.',
-    parameters: { type: 'OBJECT', properties: { target: { type: 'STRING', enum: ['iss', 'moon', 'rover', 'experiment'] }, module: STR, explode: { type: 'BOOLEAN' }, experiment: { ...STR, description: 'PSI accession to install/show, e.g. PSI-25' } }, required: ['target'] } },
+    parameters: { type: 'OBJECT', properties: { target: { type: 'STRING', enum: ['iss', 'moon', 'rover', 'experiment'] }, module: STR, explode: { type: 'BOOLEAN' }, experiment: { ...STR, description: 'PSI accession to install/show, e.g. PSI-25' }, show: { type: 'ARRAY', items: { type: 'STRING', enum: ['cut', 'xray', 'labels', 'explode', 'break', 'apply_scenario'] }, description: 'Modes for the photoreal apparatus model: cut = cutaway, xray, labels (live values), explode, break = light it in Moon-base air, apply_scenario = move the test into the current scenario atmosphere. Empty array resets.' } }, required: ['target'] } },
   { name: 'what_if', description: 'Run a what-if: put a NASA experiment (by PSI accession) or its fuel into the current scenario atmosphere (or given o2/psi/g). Returns nearest real tests, trained-model outputs with validation, and extrapolation flags.',
     parameters: { type: 'OBJECT', properties: { investigation: STR, fuel: STR, o2: NUM, psi: NUM, g: NUM, co2: { ...NUM, description: 'CO2 mole fraction 0-1' }, he: { ...NUM, description: 'He mole fraction 0-1' }, d0_mm: NUM }, required: ['investigation'] } },
   { name: 'search_psi', description: 'Search harvested NASA PSI investigation text (objectives, approach, impacts). Returns accessions, titles and excerpts.', parameters: { type: 'OBJECT', properties: { query: STR }, required: ['query'] } },
   { name: 'get_investigation', description: 'Details for one PSI investigation: conditions, fuels, outputs, hardware, DOI.', parameters: { type: 'OBJECT', properties: { id: STR }, required: ['id'] } },
   { name: 'gap_stats', description: 'Count NASA tests near the current scenario atmosphere by fuel class (solid/liquid/gas), and how far the window must widen before the first solid test appears.', parameters: { type: 'OBJECT', properties: { tol_o2: NUM, tol_psi: NUM } } },
   { name: 'rank_for_scenario', description: 'Top PSI investigations ranked by relevance to the current scenario.', parameters: { type: 'OBJECT', properties: { top: NUM } } },
-  { name: 'next_best_experiments', description: 'Where a new droplet test would reduce model uncertainty most, weighted toward the current scenario.', parameters: { type: 'OBJECT', properties: { fuel: { type: 'STRING', enum: ['Heptane', 'Methanol'] }, co2: NUM, he: NUM } } },
+  { name: 'next_best_experiments', description: 'Optimal test campaign: which N flight tests shrink the droplet burning-rate model 95% band the most across the habitat atmospheres (exact Gaussian-process design). Returns the picks and the band before and after. Use for "what should we test next".', parameters: { type: 'OBJECT', properties: { fuel: { type: 'STRING', enum: ['Heptane', 'Methanol'] }, co2: NUM, he: NUM, tests: { ...NUM, description: 'number of flight test slots, 1-12, default 5' } } } },
   { name: 'compare', description: 'Compare 2-3 PSI investigations side by side (opens the comparison).', parameters: { type: 'OBJECT', properties: { ids: { type: 'ARRAY', items: STR } }, required: ['ids'] } },
 ]
 
-const SYSTEM = (mode, address) => `You are EMBER, a fire-safety copilot for engineers designing crewed spacecraft and Moon/Mars habitats, built on NASA PSI microgravity combustion data.
+export const SYSTEM = (mode, address) => `You are EMBER, a fire-safety copilot for engineers designing crewed spacecraft and Moon/Mars habitats, built on NASA PSI microgravity combustion data.
 Personality: calm, quick, precise, like a trusted lab partner. ${address ? `Address the user as "${address}" occasionally.` : 'Do not use honorifics.'}
 ${mode === 'voice' ? 'You are SPEAKING aloud. Reply in 1-2 short conversational sentences (under 35 words), no lists, no markdown, no citations brackets, say numbers naturally.' : 'Reply briefly (1-3 sentences) unless asked for detail.'}
 Only when the user explicitly asks for detail ("explain", "in detail", "walk me through", "why") give a clear, structured explanation${mode === 'voice' ? ' in spoken sentences' : ''}.
 Rules:
 - Use tools for every number and fact; never invent values. If a tool says data is missing or extrapolated, say so plainly.
 - When asked to show, pull up, open or change something, call the UI tools (set_scenario, navigate, explore_3d, compare) and confirm in a few words.
+- Experiment apparatus are photoreal 3D models (FLEX droplets PSI-69, ACME burners PSI-159/10, Saffire PSI-98/99/100, BASS PSI-25/26 and SPICE/SLICE PSI-107/106 in the glovebox): use explore_3d with show (cut, xray, labels, explode, break, apply_scenario) to cut it open, label it, take it apart or move the test into the scenario air. Its numbers come from what_if; quote those, never invent.
 - For "what happens if" questions: set_scenario if the atmosphere changes, then what_if, then answer with the key result and its biggest caveat.
+- For "are we ready", "can we certify" or "what do we know" questions: set_scenario if a habitat is named, then readiness; lead with how many checks are met and name the missing ones.
+- The ISS, the Moon base and the pressurized rover in the 3D explorer are real-time 3D models whose cabin air follows the scenario; use explore_3d with target iss, moon or rover and show (cut, xray, labels, explode, break = oxygen leak). "Take it apart" means explode. Set the matching scenario first when a habitat is named.
+- You operate the dashboard. For a cited literature answer, tell the user the Ask view does that job.
 - Risk-first: never soften a hazard. All PSI flight data is microgravity; no partial-gravity data exists.
-- Mention sources briefly by name (e.g. "per BASS-II"). Rocket propellants are out of scope.`
+- Mention sources briefly by name (e.g. "per BASS-II"). Rocket propellants are out of scope.
+- Plain text only: no LaTeX, no dollar signs, no markdown. Write units as characters, e.g. 0.74 ± 0.07 mm²/s. Always name the fuel a number refers to.`
 
 async function body(req) {
   if (req.body && typeof req.body === 'object') return req.body

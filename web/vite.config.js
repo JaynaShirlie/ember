@@ -7,7 +7,7 @@ function apiDev() {
   return {
     name: 'ember-api-dev',
     configureServer(server) {
-      for (const name of ['ask', 'agent', 'voice']) server.middlewares.use('/api/' + name, async (req, res) => {
+      for (const name of ['ask', 'agent', 'live']) server.middlewares.use('/api/' + name, async (req, res) => {
         const cwd = process.cwd()
         process.chdir(path.resolve(__dirname, '..'))
         try {
@@ -19,7 +19,9 @@ function apiDev() {
   }
 }
 
+
 export default defineConfig(({ mode }) => {
   Object.assign(process.env, loadEnv(mode, path.resolve(__dirname, '..'), ''))
-  return { plugins: [react(), apiDev()], build: { chunkSizeWarningLimit: 1500 } }
+  // __BUILD__ busts the browser cache for the machine pages in public/ (they are not hashed by Vite)
+  return { plugins: [react(), apiDev()], define: { __BUILD__: JSON.stringify(Date.now().toString(36)) }, build: { chunkSizeWarningLimit: 1500 } }
 })

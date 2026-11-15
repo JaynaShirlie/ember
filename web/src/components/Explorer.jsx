@@ -135,7 +135,7 @@ function Apparatus({ kind, inv, row, onPart }) {
       <Label position={[0, 1.2, 0]}>{row.table} · {row.fuel} · inlet {v} cm/s</Label>
     </group>
   }
-  return <Label position={[0, 0, 0]}>This investigation's table has no apparatus geometry to reconstruct.</Label>
+  return <Label position={[0, 0, 0]}>{row ? "This investigation's table has no apparatus geometry to reconstruct." : (inv?.acronym || inv?.accession) + ' published only a planned test matrix in NASA PSI, with no measured test rows, so there is nothing to rebuild.'}</Label>
 }
 
 // ---------- photoreal machine pages (Machine Skill kit, public/machines/*.html), driven over a same-origin bridge ----------
@@ -190,7 +190,7 @@ function MachineLayer({ src, id, live, onShown, row, hab, show, applyKey, follow
 
 export default function Explorer({ data, hab, setHab, testsByInv, explorer, setExplorer, whatIf }) {
   const scene = HABITAT_SCENES[explorer.target] || HABITAT_SCENES.iss
-  const invs = useMemo(() => data.invs.filter(i => (testsByInv[i.accession] || []).length && hostOf(i)), [data, testsByInv])
+  const invs = useMemo(() => data.invs.filter(i => (testsByInv[i.accession] || []).some(t => !t.matrix) && hostOf(i)), [data, testsByInv])
   const inv = data.invs.find(i => i.accession === explorer.experiment) || null
   const rows = useMemo(() => (inv ? (testsByInv[inv.accession] || []).filter(t => !t.matrix) : []), [inv, testsByInv])
   const [rowIdx, setRowIdx] = useState(0)

@@ -114,3 +114,9 @@ table.t th { color: var(--dim); font-weight: 400 }
 .copilot form input { flex: 1 }
 .copilot footer { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding: 0 14px 10px }
 .copilot .btn.on { background: rgba(95,211,154,.15); border-color: var(--green); color: var(--green) }
+
+/* ---------- 3D explorer ---------- */
+.explorer .side { display: flex; flex-direction: column; gap: 14px; max-height: 70vh; overflow: auto }
+.canvas3d.holo { background: radial-gradient(ellipse at 50% 60%, #071a2e 0%, #02040a 70%); border-color: #17405e }
+.holo-label { font: 500 11px/1.2 Poppins, sans-serif; color: #bfeaff; background: rgba(4,20,36,.78); border: 1px solid rgba(127,211,247,.45); padding: 3px 8px; border-radius: 6px; white-space: nowrap; letter-spacing: .3px }
+.holo-label.hot { color: #ffd9a3; border-color: rgba(242,165,65,.7) }

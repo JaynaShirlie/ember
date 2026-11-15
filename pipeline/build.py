@@ -196,7 +196,7 @@ def a_saffire():
             add(inv, label, i, fuel=mat.strip(), fuelClass="solid", config="large sample in flow duct (Cygnus)",
                 o2Pct=o2 if o2 else 21.0, o2Basis="measured" if o2 else "assumed-cabin",
                 pressurePsi=CABIN_PSI, pressureBasis="assumed-cabin", flowCmS=num(r[col(df, "air flow")]),
-                out={"direction": str(r[col(df, "direction")]).strip(), "thickness": r[col(df, "thickness")],
+                out={"direction": str(r[col(df, "direction")]).strip(), "thickness": r[col(df, "thickness")], "length": r[col(df, "length")] if col(df, "length") else None, "width": r[col(df, "width")] if col(df, "width") else None,
                      "burn": r.get(col(df, "burn time")) if col(df, "burn time") else None,
                      "spread1g": r.get(col(df, "1-g spread")) if col(df, "1-g spread") else None})
 

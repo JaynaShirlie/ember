@@ -21,7 +21,7 @@ export function makeExecutors(ctx) {
     },
     navigate({ view }) { ctx.setTab(view); return { opened: view } },
     explore_3d({ target, module, explode, experiment }) {
-      ctx.setExplorer(e => ({ ...e, target, module: module || null, explode: explode ?? e.explode, experiment: experiment ? norm(experiment) : e.experiment }))
+      ctx.setExplorer(e => ({ ...e, target: target === 'experiment' ? e.target : target, module: module || null, explode: explode ?? e.explode, experiment: experiment ? norm(experiment) : e.experiment, focus: experiment || target === 'experiment' ? 'apparatus' : 'habitat' }))
       ctx.setTab('explorer')
       return { opened: '3D explorer', target, module: module || null, experiment: experiment ? norm(experiment) : null }
     },

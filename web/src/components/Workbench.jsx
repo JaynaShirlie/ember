@@ -20,7 +20,7 @@ export default function Workbench({ base, model, setModel, clf, hab }) {
 
   function retrain(list) {
     const t0 = performance.now()
-    try { setModel(list.length ? retrainGP(base, list) : base); setMsg({ ok: true, text: list.length ? `Retrained on ${base.n} NASA + ${list.length} of your tests in ${Math.round(performance.now() - t0)} ms. The surface, fog and recommendations now include your data.` : 'Reset to the NASA-only model.' }) }
+    try { setModel(list.length ? retrainGP(base, list) : base); setMsg({ ok: true, text: list.length ? `Retrained on ${base.n} NASA + ${list.length} of your tests in ${Math.round(performance.now() - t0)} ms. The surface, band and campaign now include your data.` : 'Reset to the NASA-only model.' }) }
     catch (err) { setMsg({ ok: false, text: String(err.message || err) }) }
   }
   function addRows(rows) { const next = [...mine, ...rows]; setMine(next); retrain(next) }
@@ -45,9 +45,9 @@ export default function Workbench({ base, model, setModel, clf, hab }) {
       {(!r.inRange || e.outside.length > 0) && <div className="small warn" style={{ marginTop: 6 }}>Outside the tested range: treat as extrapolation.</div>}
     </div>
 
-    <div className="panel">
-      <h2>Add your own tests</h2>
-      <div className="small muted">Upload a CSV or add a row. The Gaussian process is retrained in your browser using the same kernel learned from NASA FLEX. Nothing is uploaded anywhere.</div>
+    <details className="panel more">
+      <summary>Add your own tests</summary>
+      <div className="small muted">Upload a CSV or add a row. The model retrains in your browser; nothing is uploaded.</div>
       <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap', alignItems: 'center' }}>
         <label className="btn">Upload CSV<input type="file" accept=".csv,text/csv" hidden onChange={e => e.target.files[0] && onFile(e.target.files[0])} /></label>
         <a className="small" href={'data:text/csv;charset=utf-8,' + encodeURIComponent(TEMPLATE)} download="ember_tests_template.csv">CSV template</a>
@@ -64,6 +64,7 @@ export default function Workbench({ base, model, setModel, clf, hab }) {
       <button className="btn primary" style={{ marginTop: 8 }} disabled={!(+row.o2 > 0 && +row.p > 0 && +row.K > 0)}
         onClick={() => addRows([{ fuel: row.fuel, o2: +row.o2, p: +row.p, co2: +row.co2 || 0, he: +row.he || 0, K: +row.K, id: 'user-' + (mine.length + 1) }])}>Add test & retrain</button>
       {msg && <div className={'small ' + (msg.ok ? 'good' : 'alert')} style={{ marginTop: 8 }}>{msg.text}</div>}
-    </div>
+      <div style={{ height: 14 }} />
+    </details>
   </>
 }

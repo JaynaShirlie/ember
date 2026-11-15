@@ -28,7 +28,10 @@ export default function Ask({ hab }) {
       const j = await r.json()
       if (!r.ok) throw new Error(j.error || r.status)
       setRes(j)
-    } catch (e) { setErr(String(e.message || e)) } finally { setBusy(false) }
+    } catch (e) {
+      const m = String(e.message || e)
+      setErr(/failed to fetch|networkerror/i.test(m) ? 'Cannot reach the EMBER server. Check that it is running (or your connection), then try again.' : m)
+    } finally { setBusy(false) }
   }
 
   // shareable links: ?q=question auto-runs the question once

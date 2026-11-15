@@ -7,11 +7,11 @@ function apiDev() {
   return {
     name: 'ember-api-dev',
     configureServer(server) {
-      server.middlewares.use('/api/ask', async (req, res) => {
+      for (const name of ['ask', 'agent']) server.middlewares.use('/api/' + name, async (req, res) => {
         const cwd = process.cwd()
         process.chdir(path.resolve(__dirname, '..'))
         try {
-          const mod = await server.ssrLoadModule(path.resolve(__dirname, '../api/ask.js'))
+          const mod = await server.ssrLoadModule(path.resolve(__dirname, `../api/${name}.js`))
           await mod.default(req, res)
         } finally { process.chdir(cwd) }
       })

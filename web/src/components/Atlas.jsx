@@ -15,10 +15,9 @@ function flowRange(tests) {
   return f.length ? [Math.min(...f), Math.max(...f)] : null
 }
 
-export default function Atlas({ data, hab, testsByInv, focus, setFocus }) {
+export default function Atlas({ data, hab, testsByInv, focus, setFocus, cmp, setCmp }) {
   const ranked = useMemo(() => rankInvestigations(data.invs, testsByInv, hab), [data, testsByInv, hab])
   const [sel, setSel] = useState(focus || ranked[0]?.inv.accession)
-  const [cmp, setCmp] = useState([])
   const [q, setQ] = useState('')
   const cur = ranked.find(r => r.inv.accession === (focus || sel)) || ranked[0]
   const shown = ranked.filter(r => !q || (r.inv.title + r.inv.acronym + r.inv.fuels.join(' ') + r.inv.accession).toLowerCase().includes(q.toLowerCase()))

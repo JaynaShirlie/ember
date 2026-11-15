@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { askCopilot } from './Copilot.jsx'
 
 const EXAMPLES = [
   'Which experiments tell us how fabrics burn in low airflow, and what did they find?',
@@ -46,8 +47,12 @@ export default function Ask({ hab }) {
   return (
     <div className="grid-main">
       <div className="panel">
-        <h2>Ask the Flame</h2>
-        <div className="small muted" style={{ marginBottom: 8 }}>Answers come only from NASA PSI investigations EMBER harvested, with citations you can open. Context: <b>{hab.name}</b> ({hab.o2}% O₂, {hab.psi} psi, {hab.g.toFixed(2)} g).</div>
+        <h2>Ask the evidence</h2>
+        <div className="jobs" aria-label="Two assistants, two jobs">
+          <div className="job on"><b>Ask the evidence</b><span>Reads the research. One question in, one cited answer out, taken only from the text of NASA PSI investigations, with a red-team worst case. It changes nothing on screen.</span></div>
+          <button className="job" onClick={() => askCopilot()}><b>EMBER Copilot</b><span>Operates the dashboard. It sets the air, renders the 3D hardware in real time and runs the models on the test data. It does not cite papers. Open it here.</span></button>
+        </div>
+        <div className="small muted" style={{ marginBottom: 12 }}>Context for this question: {hab.name}.</div>
         <form onSubmit={e => { e.preventDefault(); ask() }} style={{ display: 'flex', gap: 8 }}>
           <textarea rows="2" style={{ flex: 1, resize: 'vertical' }} value={q} onChange={e => setQ(e.target.value)} placeholder="e.g. How does airflow change whether a fabric keeps burning in microgravity?"
             onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ask() } }} />
@@ -79,7 +84,7 @@ export default function Ask({ hab }) {
 
       <div className="panel">
         <h2>Sources used</h2>
-        {!res && <div className="small muted">The retrieved PSI investigations will appear here, ranked by relevance to your question.</div>}
+        {!res && <div className="small muted">The PSI investigations behind each answer appear here.</div>}
         {res?.sources?.map(s => (
           <div key={s.id} className="row" style={{ marginBottom: 6, cursor: 'default' }}>
             <div className="t"><b>{s.acronym || s.id}</b><span className={res.citations.includes(s.id) ? 'good small' : 'dim small'}>{res.citations.includes(s.id) ? 'cited' : 'retrieved'}</span></div>
